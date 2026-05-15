@@ -1,0 +1,459 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CTP API",
+    "description": "The CTP API provides integration methods for connecting the functionality and content of the Chinese Text Project with external web applications. It consists of a Plugin API for adding external tools and a JSON API for leveraging CTP features externally.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://ctext.org/tools/api"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ctext.org",
+      "description": "Chinese Text Project API Server"
+    }
+  ],
+  "paths": {
+    "/api/gettext": {
+      "get": {
+        "summary": "Get textual data",
+        "description": "Retrieves textual data for a specified CTP URN. Returns title, fulltext (paragraphs), and/or subsections depending on the requested item and authentication status.",
+        "operationId": "getText",
+        "tags": [
+          "JSON API"
+        ],
+        "parameters": [
+          {
+            "name": "urn",
+            "in": "query",
+            "description": "CTP URN identifying the textual item (e.g., ctp:analects/li-ren)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ctp:analects/xue-er"
+            }
+          },
+          {
+            "name": "if",
+            "in": "query",
+            "description": "Interface language (en for English, zh for Chinese)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "zh"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with textual data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/TextDataResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {},
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "SubscriberAuth": []
+          }
+        ]
+      }
+    },
+    "/api/getlink": {
+      "get": {
+        "summary": "Get link for CTP URN",
+        "description": "Transforms a CTP URN into a direct link to the corresponding text. When redirect is set to 1, redirects to the text page.",
+        "operationId": "getLink",
+        "tags": [
+          "JSON API"
+        ],
+        "parameters": [
+          {
+            "name": "urn",
+            "in": "query",
+            "description": "CTP URN to convert to link",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ctp:analects/xue-er"
+            }
+          },
+          {
+            "name": "redirect",
+            "in": "query",
+            "description": "If set to 1, redirects to the text page instead of returning JSON",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with link information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "Direct URL to the text"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect to text page (when redirect=1)"
+          }
+        }
+      }
+    },
+    "/api/readlink": {
+      "get": {
+        "summary": "Get CTP URN from URL",
+        "description": "Obtains the CTP URN corresponding to a ctext.org URL programmatically.",
+        "operationId": "readLink",
+        "tags": [
+          "JSON API"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Full ctext.org URL to convert to URN",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://ctext.org/analects/xue-er"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with URN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "urn": {
+                      "type": "string",
+                      "description": "CTP URN for the specified URL",
+                      "example": "ctp:analects/xue-er"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "URL not found or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account.pl": {
+      "get": {
+        "summary": "Install plugin",
+        "description": "Request that a user install a CTP plugin by providing the plugin XML URL. Redirects user to plugin installation page.",
+        "operationId": "installPlugin",
+        "tags": [
+          "Plugin API"
+        ],
+        "parameters": [
+          {
+            "name": "if",
+            "in": "query",
+            "description": "Interface language",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "zh"
+              ],
+              "default": "en"
+            }
+          },
+          {
+            "name": "installplugin",
+            "in": "query",
+            "description": "URL of the plugin XML file to install",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://ctext.org/plugins/textexport/plugin.xml"
+            }
+          },
+          {
+            "name": "return",
+            "in": "query",
+            "description": "Optional return URL to redirect user after installation. Must be on same domain as referring URL.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plugin installation page displayed"
+          },
+          "302": {
+            "description": "Redirect to return URL after installation"
+          }
+        }
+      }
+    },
+    "/plugins/{pluginId}/plugin.xml": {
+      "get": {
+        "summary": "Get plugin XML",
+        "description": "Retrieves the XML definition of a CTP plugin",
+        "operationId": "getPluginXml",
+        "tags": [
+          "Plugin API"
+        ],
+        "parameters": [
+          {
+            "name": "pluginId",
+            "in": "path",
+            "description": "Plugin identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "textexport"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plugin XML definition",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string",
+                  "example": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE CTPPlugin PUBLIC \"CTPPlugin\" \"http://ctext.org/plugins/ctpplugin.dtd\"><CTPPlugin xmlns=\"http://schema.ctext.org/Plugin\"><Plugin><ShortName xml:lang=\"en\">Plain text</ShortName><Description xml:lang=\"en\">Export a chapter as plain text.</Description><Url template=\"https://ctext.org/plugins/textexport/#{textRef}\" pluginType=\"chapter\" fieldEncoding=\"utf8\" method=\"get\" /><Update src=\"https://ctext.org/plugins/textexport/plugin.xml\" /></Plugin></CTPPlugin>"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Plugin not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TextDataResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title in Chinese of the requested item",
+            "example": "學而"
+          },
+          "fulltext": {
+            "type": "array",
+            "description": "An ordered list of paragraphs of text",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "子曰：「學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？」"
+            ]
+          },
+          "subsections": {
+            "type": "array",
+            "description": "An ordered list of URNs for subsections of the requested item. Only available to authenticated users.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "ctp:analects/xue-er",
+              "ctp:analects/wei-zheng"
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code constant describing the type of error",
+                "example": "ERR_REQUIRES_AUTHENTICATION"
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable error message"
+              }
+            }
+          }
+        }
+      },
+      "PluginXml": {
+        "type": "object",
+        "description": "CTP Plugin XML structure conforming to CTPPlugin DTD",
+        "properties": {
+          "ShortName": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "Plugin name (max 20 characters)",
+            "example": "Plain text"
+          },
+          "Description": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Plugin description (max 250 characters)",
+            "example": "Export a chapter as plain text."
+          },
+          "Url": {
+            "type": "object",
+            "properties": {
+              "template": {
+                "type": "string",
+                "description": "URL schema with field placeholders",
+                "example": "https://ctext.org/plugins/textexport/#{textRef}"
+              },
+              "pluginType": {
+                "type": "string",
+                "enum": [
+                  "character",
+                  "word",
+                  "string",
+                  "chapter",
+                  "book"
+                ],
+                "description": "Comma-separated list of accepted data types",
+                "example": "chapter"
+              },
+              "fieldEncoding": {
+                "type": "string",
+                "enum": [
+                  "utf8",
+                  "gb",
+                  "big5",
+                  "big5.hex",
+                  "big5.HEX",
+                  "codepoint.hex",
+                  "codepoint.HEX"
+                ],
+                "default": "utf8",
+                "description": "Character encoding format"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "get",
+                  "post"
+                ],
+                "default": "get",
+                "description": "HTTP method to use"
+              }
+            }
+          },
+          "Update": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL containing the XML plugin data for automatic updates",
+                "example": "https://ctext.org/plugins/textexport/plugin.xml"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey",
+        "description": "API key for authenticated access"
+      },
+      "SubscriberAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Subscriber authentication credentials"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "JSON API",
+      "description": "JSON API endpoints for accessing CTP textual data and metadata"
+    },
+    {
+      "name": "Plugin API",
+      "description": "Plugin API endpoints for installing and managing CTP plugins"
+    }
+  ]
+}

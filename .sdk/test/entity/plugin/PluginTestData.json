@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "plugin": {
+      "PLUGIN00": {},
+      "PLUGIN01": {},
+      "PLUGIN02": {}
+    }
+  },
+  "new": {
+    "plugin": {
+      "plugin_ref01": {}
+    }
+  }
+}

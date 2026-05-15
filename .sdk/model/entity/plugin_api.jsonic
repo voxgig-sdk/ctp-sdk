@@ -1,0 +1,63 @@
+# Entity: plugin_api
+
+main: kit: entity: plugin_api: {
+
+  alias: field: {}
+
+  name: "plugin_api"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "if"
+                orig: "if"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "https://ctext.org/plugins/textexport/plugin.xml"
+                kind: "query"
+                name: "installplugin"
+                orig: "installplugin"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "return"
+                orig: "return"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/account.pl"
+          parts: [
+            "account.pl"
+          ]
+          select: {
+            exist: [
+              "if"
+              "installplugin"
+              "return"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

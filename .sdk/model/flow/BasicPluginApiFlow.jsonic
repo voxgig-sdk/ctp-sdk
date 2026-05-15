@@ -1,0 +1,28 @@
+# BasicPluginApiFlow
+
+main: kit: flow: BasicPluginApiFlow:
+{
+  entity: "plugin_api",
+  kind: "basic",
+  name: "BasicPluginApiFlow",
+  step: [
+    {
+      input: {
+        ref: "plugin_api_ref01",
+        srcdatavar: "plugin_api_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-plugin_api_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPluginApiFlow"
+}

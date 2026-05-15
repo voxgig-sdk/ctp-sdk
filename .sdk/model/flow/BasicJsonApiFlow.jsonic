@@ -1,0 +1,28 @@
+# BasicJsonApiFlow
+
+main: kit: flow: BasicJsonApiFlow:
+{
+  entity: "json_api",
+  kind: "basic",
+  name: "BasicJsonApiFlow",
+  step: [
+    {
+      input: {
+        ref: "json_api_ref01",
+        srcdatavar: "json_api_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-json_api_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicJsonApiFlow"
+}

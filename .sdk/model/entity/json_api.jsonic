@@ -1,0 +1,136 @@
+# Entity: json_api
+
+main: kit: entity: json_api: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "urn"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "json_api"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "if"
+                orig: "if"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "ctp:analects/xue-er"
+                kind: "query"
+                name: "urn"
+                orig: "urn"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/gettext"
+          parts: [
+            "api"
+            "gettext"
+          ]
+          select: {
+            exist: [
+              "if"
+              "urn"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: 0
+                kind: "query"
+                name: "redirect"
+                orig: "redirect"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: "ctp:analects/xue-er"
+                kind: "query"
+                name: "urn"
+                orig: "urn"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/getlink"
+          parts: [
+            "api"
+            "getlink"
+          ]
+          select: {
+            exist: [
+              "redirect"
+              "urn"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: "https://ctext.org/analects/xue-er"
+                kind: "query"
+                name: "url"
+                orig: "url"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/readlink"
+          parts: [
+            "api"
+            "readlink"
+          ]
+          select: {
+            exist: [
+              "url"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

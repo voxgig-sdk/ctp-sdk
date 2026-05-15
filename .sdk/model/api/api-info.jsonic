@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://ctext.org/tools/api"
+      }
+      description: "The CTP API provides integration methods for connecting the functionality and content of the Chinese Text Project with external web applications. It consists of a Plugin API for adding external tools and a JSON API for leveraging CTP features externally."
+      servers: [
+        {
+          description: "Chinese Text Project API Server"
+          url: "https://ctext.org"
+        }
+      ]
+      title: "CTP API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

@@ -1,0 +1,33 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 5
+  metrics: count: method: 5
+
+  entity: json_api: {
+    path: "/api/getlink": {
+      op: load: method: *GET
+    }
+    path: "/api/gettext": {
+      op: load: method: *GET
+    }
+    path: "/api/readlink": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: plugin: {
+    path: "/plugins/{pluginId}/plugin.xml": {
+      rename: param: "pluginId": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: plugin_api: {
+    path: "/account.pl": {
+      op: load: method: *GET
+    }
+  }
+
+}

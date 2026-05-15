@@ -1,0 +1,53 @@
+# Entity: plugin
+
+main: kit: entity: plugin: {
+
+  alias: field: {}
+
+  name: "plugin"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "textexport"
+                kind: "param"
+                name: "id"
+                orig: "plugin_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/plugins/{pluginId}/plugin.xml"
+          parts: [
+            "plugins"
+            "{id}"
+            "plugin.xml"
+          ]
+          rename: {
+            param: {
+              pluginId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "json_api": {
+      "JSON_API00": {
+        "url": "s14",
+        "urn": "s15"
+      },
+      "JSON_API01": {
+        "url": "s28",
+        "urn": "s29"
+      },
+      "JSON_API02": {
+        "url": "s3c",
+        "urn": "s3d"
+      }
+    }
+  },
+  "new": {
+    "json_api": {
+      "json_api_ref01": {
+        "url": "s50",
+        "urn": "s51"
+      }
+    }
+  }
+}
