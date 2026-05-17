@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/ctp-sdk"
-	"github.com/voxgig-sdk/ctp-sdk/core"
+	sdk "github.com/voxgig-sdk/ctp-sdk/go"
+	"github.com/voxgig-sdk/ctp-sdk/go/core"
 )
 
 func TestPluginApiDirect(t *testing.T) {

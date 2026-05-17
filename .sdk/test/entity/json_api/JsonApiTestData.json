@@ -3,15 +3,18 @@
     "json_api": {
       "JSON_API00": {
         "url": "s14",
-        "urn": "s15"
+        "urn": "s15",
+        "id": "JSON_API00"
       },
       "JSON_API01": {
         "url": "s28",
-        "urn": "s29"
+        "urn": "s29",
+        "id": "JSON_API01"
       },
       "JSON_API02": {
         "url": "s3c",
-        "urn": "s3d"
+        "urn": "s3d",
+        "id": "JSON_API02"
       }
     }
   },

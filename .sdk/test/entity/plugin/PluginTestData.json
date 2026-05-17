@@ -1,9 +1,15 @@
 {
   "existing": {
     "plugin": {
-      "PLUGIN00": {},
-      "PLUGIN01": {},
-      "PLUGIN02": {}
+      "PLUGIN00": {
+        "id": "PLUGIN00"
+      },
+      "PLUGIN01": {
+        "id": "PLUGIN01"
+      },
+      "PLUGIN02": {
+        "id": "PLUGIN02"
+      }
     }
   },
   "new": {

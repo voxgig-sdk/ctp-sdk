@@ -1,9 +1,15 @@
 {
   "existing": {
     "plugin_api": {
-      "PLUGIN_API00": {},
-      "PLUGIN_API01": {},
-      "PLUGIN_API02": {}
+      "PLUGIN_API00": {
+        "id": "PLUGIN_API00"
+      },
+      "PLUGIN_API01": {
+        "id": "PLUGIN_API01"
+      },
+      "PLUGIN_API02": {
+        "id": "PLUGIN_API02"
+      }
     }
   },
   "new": {

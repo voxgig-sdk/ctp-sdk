@@ -1,10 +1,10 @@
 package voxgigctpsdk
 
 import (
-	"github.com/voxgig-sdk/ctp-sdk/core"
-	"github.com/voxgig-sdk/ctp-sdk/entity"
-	"github.com/voxgig-sdk/ctp-sdk/feature"
-	_ "github.com/voxgig-sdk/ctp-sdk/utility"
+	"github.com/voxgig-sdk/ctp-sdk/go/core"
+	"github.com/voxgig-sdk/ctp-sdk/go/entity"
+	"github.com/voxgig-sdk/ctp-sdk/go/feature"
+	_ "github.com/voxgig-sdk/ctp-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
