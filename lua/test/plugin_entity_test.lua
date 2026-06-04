@@ -91,7 +91,6 @@ function plugin_basic_setup(extra)
     ["CTP_TEST_PLUGIN_ENTID"] = idmap,
     ["CTP_TEST_LIVE"] = "FALSE",
     ["CTP_TEST_EXPLAIN"] = "FALSE",
-    ["CTP_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function plugin_basic_setup(extra)
   if env["CTP_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["CTP_APIKEY"],
       },
       extra or {},
     })

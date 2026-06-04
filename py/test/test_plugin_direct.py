@@ -66,14 +66,12 @@ def _plugin_direct_setup(mockres):
     env = runner.env_override({
         "CTP_TEST_PLUGIN_ENTID": {},
         "CTP_TEST_LIVE": "FALSE",
-        "CTP_APIKEY": "NONE",
     })
 
     live = env.get("CTP_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("CTP_APIKEY"),
         }
         client = CtpSDK(merged_opts)
         return {

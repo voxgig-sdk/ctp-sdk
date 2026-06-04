@@ -79,14 +79,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'CTP_TEST_PLUGIN_ENTID': {},
     'CTP_TEST_LIVE': 'FALSE',
-    'CTP_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.CTP_TEST_LIVE
 
   if (live) {
     const client = new CtpSDK({
-      apikey: env.CTP_APIKEY,
     })
 
     let idmap: any = env['CTP_TEST_PLUGIN_ENTID']

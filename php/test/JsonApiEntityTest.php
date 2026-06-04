@@ -85,7 +85,6 @@ function json_api_basic_setup($extra)
         "CTP_TEST_JSON_API_ENTID" => $idmap,
         "CTP_TEST_LIVE" => "FALSE",
         "CTP_TEST_EXPLAIN" => "FALSE",
-        "CTP_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +96,6 @@ function json_api_basic_setup($extra)
     if ($env["CTP_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["CTP_APIKEY"],
             ],
             $extra ?? [],
         ]);

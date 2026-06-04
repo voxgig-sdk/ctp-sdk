@@ -16,7 +16,19 @@
           }
         ],
         "title": "CTP API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Programmatic access to the Chinese Text Project's library of pre-modern Chinese texts via a JSON API and Plugin API",
+        "homepage": "https://ctext.org",
+        "docs_url": "https://ctext.org/tools/api",
+        "license_short": "Content is copyright ctext.org; citations must link back to the corresponding page or to http://ctext.org",
+        "license_md": "- Texts and metadata are copyright Chinese Text Project (ctext.org), 2006-2026\n- When citing or reusing content, link to the corresponding CTP page or to `http://ctext.org`\n- Some material is provided by institutional subscribers under separate terms; respect any per-text notices\n- See [CTP copyright FAQ](https://ctext.org/faq#copyright) for full terms",
+        "about_md": "The [Chinese Text Project](https://ctext.org) (CTP) is an online open-access digital library of pre-modern Chinese writing, hosting over thirty thousand titles and more than five billion characters of classical and literary Chinese text. The CTP API lets external applications read text content, resolve references, and embed CTP functionality remotely.\n\nThe project exposes two integration surfaces. The **JSON API** is for outside applications fetching CTP data; the **Plugin API** is for adding external tools that appear inside the CTP interface. Documented JSON functions include:\n\n- `gettext` — retrieve textual data (titles, ordered paragraph lists, subsection URNs) for a given CTP URN such as `ctp:analects/xue-er`\n- `getlink` — turn a CTP URN into a direct link\n- `readlink` — resolve a CTP URL back to its URN\n- `getstatus` — check current user authentication status\n- `getdictionaryheadwords` — list Chinese dictionary headwords\n\nCTP URNs (e.g. `ctp:analects/xue-er`) are the opaque identifiers used throughout the API. CORS is enabled and browser clients can use `withCredentials` for authenticated requests. Access is tiered: unauthenticated callers get a limited quota, logged-in accounts get more, and institutional subscribers get access per their agreement; hitting the cap returns a \"Request limit reached\" response that prompts users to log in.",
+        "entity_desc": {
+          "json_api": "The JSON API surface for fetching CTP content from external applications, covering functions like `gettext`, `getlink`, `readlink`, `getstatus`, and `getdictionaryheadwords`.",
+          "plugin": "A registered external tool that integrates into the CTP user interface via the Plugin API.",
+          "plugin_api": "The integration surface for building plugins that extend the CTP site with external tools and embedded functionality."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +36,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "json_api": {

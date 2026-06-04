@@ -20,9 +20,6 @@ class CtpConfig
             ],
             "options" => [
                 "base" => "https://ctext.org",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

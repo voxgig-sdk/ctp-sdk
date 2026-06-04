@@ -68,14 +68,12 @@ function plugin_api_direct_setup(mockres)
   local env = runner.env_override({
     ["CTP_TEST_PLUGIN_API_ENTID"] = {},
     ["CTP_TEST_LIVE"] = "FALSE",
-    ["CTP_APIKEY"] = "NONE",
   })
 
   local live = env["CTP_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["CTP_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {
