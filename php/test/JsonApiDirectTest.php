@@ -73,12 +73,14 @@ function json_api_direct_setup($mockres)
     $env = Runner::env_override([
         "CTP_TEST_JSON_API_ENTID" => [],
         "CTP_TEST_LIVE" => "FALSE",
+        "CTP_APIKEY" => "NONE",
     ]);
 
     $live = $env["CTP_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["CTP_APIKEY"],
         ];
         $client = new CtpSDK($merged_opts);
         return [

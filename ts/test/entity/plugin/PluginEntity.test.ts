@@ -111,6 +111,7 @@ function basicSetup(extra?: any) {
     'CTP_TEST_PLUGIN_ENTID': idmap,
     'CTP_TEST_LIVE': 'FALSE',
     'CTP_TEST_EXPLAIN': 'FALSE',
+    'CTP_APIKEY': 'NONE',
   })
 
   idmap = env['CTP_TEST_PLUGIN_ENTID']
@@ -120,6 +121,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new CtpSDK(merge([
       {
+        apikey: env.CTP_APIKEY,
       },
       extra
     ]))

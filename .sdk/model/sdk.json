@@ -1,41 +1,13 @@
 {
-  "name": "ctp",
-  "origin": "voxgig-sdk",
   "def": "ctp_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "contact": {
-          "url": "https://ctext.org/tools/api"
-        },
-        "description": "The CTP API provides integration methods for connecting the functionality and content of the Chinese Text Project with external web applications. It consists of a Plugin API for adding external tools and a JSON API for leveraging CTP features externally.",
-        "servers": [
-          {
-            "description": "Chinese Text Project API Server",
-            "url": "https://ctext.org"
-          }
-        ],
-        "title": "CTP API",
-        "version": "1.0.0",
-        "tagline": "Programmatic access to the Chinese Text Project's library of pre-modern Chinese texts via a JSON API and Plugin API",
-        "homepage": "https://ctext.org",
-        "docs_url": "https://ctext.org/tools/api",
-        "license_short": "Content is copyright ctext.org; citations must link back to the corresponding page or to http://ctext.org",
-        "license_md": "- Texts and metadata are copyright Chinese Text Project (ctext.org), 2006-2026\n- When citing or reusing content, link to the corresponding CTP page or to `http://ctext.org`\n- Some material is provided by institutional subscribers under separate terms; respect any per-text notices\n- See [CTP copyright FAQ](https://ctext.org/faq#copyright) for full terms",
-        "about_md": "The [Chinese Text Project](https://ctext.org) (CTP) is an online open-access digital library of pre-modern Chinese writing, hosting over thirty thousand titles and more than five billion characters of classical and literary Chinese text. The CTP API lets external applications read text content, resolve references, and embed CTP functionality remotely.\n\nThe project exposes two integration surfaces. The **JSON API** is for outside applications fetching CTP data; the **Plugin API** is for adding external tools that appear inside the CTP interface. Documented JSON functions include:\n\n- `gettext` — retrieve textual data (titles, ordered paragraph lists, subsection URNs) for a given CTP URN such as `ctp:analects/xue-er`\n- `getlink` — turn a CTP URN into a direct link\n- `readlink` — resolve a CTP URL back to its URN\n- `getstatus` — check current user authentication status\n- `getdictionaryheadwords` — list Chinese dictionary headwords\n\nCTP URNs (e.g. `ctp:analects/xue-er`) are the opaque identifiers used throughout the API. CORS is enabled and browser clients can use `withCredentials` for authenticated requests. Access is tiered: unauthenticated callers get a limited quota, logged-in accounts get more, and institutional subscribers get access per their agreement; hitting the cap returns a \"Request limit reached\" response that prompts users to log in.",
-        "entity_desc": {
-          "json_api": "The JSON API surface for fetching CTP content from external applications, covering functions like `gettext`, `getlink`, `readlink`, `getstatus`, and `getdictionaryheadwords`.",
-          "plugin": "A registered external tool that integrates into the CTP user interface via the Plugin API.",
-          "plugin_api": "The integration surface for building plugins that extend the CTP site with external tools and embedded functionality."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -44,52 +16,58 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "json_api": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "url",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "urn",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "json_api",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "en",
                         "kind": "query",
                         "name": "if",
                         "orig": "if",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "ctp:analects/xue-er",
                         "kind": "query",
                         "name": "urn",
                         "orig": "urn",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -108,29 +86,29 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 },
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": 0,
                         "kind": "query",
                         "name": "redirect",
                         "orig": "redirect",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       },
                       {
+                        "active": true,
                         "example": "ctp:analects/xue-er",
                         "kind": "query",
                         "name": "urn",
                         "orig": "urn",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -149,20 +127,20 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 },
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "https://ctext.org/analects/xue-er",
                         "kind": "query",
                         "name": "url",
                         "orig": "url",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -180,38 +158,39 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "plugin": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "plugin",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "textexport",
                         "kind": "param",
                         "name": "id",
                         "orig": "plugin_id",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -235,56 +214,56 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
         },
         "plugin_api": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "plugin_api",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "en",
                         "kind": "query",
                         "name": "if",
                         "orig": "if",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "https://ctext.org/plugins/textexport/plugin.xml",
                         "kind": "query",
                         "name": "installplugin",
                         "orig": "installplugin",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "return",
                         "orig": "return",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -303,15 +282,11 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
@@ -319,9 +294,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -329,6 +301,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -337,25 +317,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -371,20 +337,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -399,28 +377,34 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicJsonApiFlow": {
+          "active": true,
           "entity": "json_api",
+          "key$": "BasicJsonApiFlow",
           "kind": "basic",
           "name": "BasicJsonApiFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "json_api_ref01",
                 "srcdatavar": "json_api_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -428,29 +412,29 @@
                     "mark": "Mark01-json_api_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicJsonApiFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicPluginApiFlow": {
+          "active": true,
           "entity": "plugin_api",
+          "key$": "BasicPluginApiFlow",
           "kind": "basic",
           "name": "BasicPluginApiFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "plugin_api_ref01",
                 "srcdatavar": "plugin_api_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -458,23 +442,21 @@
                     "mark": "Mark01-plugin_api_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicPluginApiFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicPluginFlow": {
+          "active": true,
           "entity": "plugin",
+          "key$": "BasicPluginFlow",
           "kind": "basic",
           "name": "BasicPluginFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "plugin_ref01",
                 "srcdatavar": "plugin_ref01_data",
@@ -484,6 +466,7 @@
                 "id": "plugin01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -491,27 +474,52 @@
                     "mark": "Mark01-plugin_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicPluginFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "contact": {
+          "url": "https://ctext.org/tools/api"
+        },
+        "description": "The CTP API provides integration methods for connecting the functionality and content of the Chinese Text Project with external web applications. It consists of a Plugin API for adding external tools and a JSON API for leveraging CTP features externally.",
+        "servers": [
+          {
+            "description": "Chinese Text Project API Server",
+            "url": "https://ctext.org"
+          }
+        ],
+        "title": "CTP API",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "ctp"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "ctp"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -526,19 +534,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "ctp"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -553,138 +561,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "ctp"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "ctp"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "ctp"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "ctp"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "ctp"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "ctp"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "ctp"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "ctp"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "ctp"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "ctp",
+  "origin": "voxgig-sdk"
 }

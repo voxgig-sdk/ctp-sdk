@@ -91,6 +91,7 @@ function json_api_basic_setup(extra)
     ["CTP_TEST_JSON_API_ENTID"] = idmap,
     ["CTP_TEST_LIVE"] = "FALSE",
     ["CTP_TEST_EXPLAIN"] = "FALSE",
+    ["CTP_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function json_api_basic_setup(extra)
   if env["CTP_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["CTP_APIKEY"],
       },
       extra or {},
     })

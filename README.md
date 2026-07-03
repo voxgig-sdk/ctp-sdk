@@ -1,22 +1,8 @@
 # Ctp SDK
 
-Programmatic access to the Chinese Text Project's library of pre-modern Chinese texts via a JSON API and Plugin API
+CTP API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About CTP API
-
-The [Chinese Text Project](https://ctext.org) (CTP) is an online open-access digital library of pre-modern Chinese writing, hosting over thirty thousand titles and more than five billion characters of classical and literary Chinese text. The CTP API lets external applications read text content, resolve references, and embed CTP functionality remotely.
-
-The project exposes two integration surfaces. The **JSON API** is for outside applications fetching CTP data; the **Plugin API** is for adding external tools that appear inside the CTP interface. Documented JSON functions include:
-
-- `gettext` — retrieve textual data (titles, ordered paragraph lists, subsection URNs) for a given CTP URN such as `ctp:analects/xue-er`
-- `getlink` — turn a CTP URN into a direct link
-- `readlink` — resolve a CTP URL back to its URN
-- `getstatus` — check current user authentication status
-- `getdictionaryheadwords` — list Chinese dictionary headwords
-
-CTP URNs (e.g. `ctp:analects/xue-er`) are the opaque identifiers used throughout the API. CORS is enabled and browser clients can use `withCredentials` for authenticated requests. Access is tiered: unauthenticated callers get a limited quota, logged-in accounts get more, and institutional subscribers get access per their agreement; hitting the cap returns a "Request limit reached" response that prompts users to log in.
 
 ## Try it
 
@@ -50,27 +36,31 @@ gem install ctp-sdk
 luarocks install ctp-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { CtpSDK } from 'ctp'
 
-const client = new CtpSDK({})
+const client = new CtpSDK({
+  apikey: process.env.CTP_APIKEY,
+})
 
+// Load jsonapi data
+const jsonapi = await client.JsonApi().load({})
+console.log(jsonapi.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **JsonApi** | The JSON API surface for fetching CTP content from external applications, covering functions like `gettext`, `getlink`, `readlink`, `getstatus`, and `getdictionaryheadwords`. | `/api/gettext` |
-| **Plugin** | A registered external tool that integrates into the CTP user interface via the Plugin API. | `/plugins/{pluginId}/plugin.xml` |
-| **PluginApi** | The integration surface for building plugins that extend the CTP site with external tools and embedded functionality. | `/account.pl` |
+| **JsonApi** |  | `/api/gettext` |
+| **Plugin** |  | `/plugins/{pluginId}/plugin.xml` |
+| **PluginApi** |  | `/account.pl` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,15 +102,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from ctp_sdk import CtpSDK
 
-client = CtpSDK({})
+client = CtpSDK({
+    "apikey": os.environ.get("CTP_APIKEY"),
+})
 
 
 # Load a specific jsonapi
-jsonapi, err = client.JsonApi(None).load(
-    {"id": "example_id"}, None
-)
+jsonapi, err = client.JsonApi().load({"id": "example_id"})
+print(jsonapi)
 ```
 
 ### PHP
@@ -129,13 +121,14 @@ jsonapi, err = client.JsonApi(None).load(
 <?php
 require_once 'ctp_sdk.php';
 
-$client = new CtpSDK([]);
+$client = new CtpSDK([
+    "apikey" => getenv("CTP_APIKEY"),
+]);
 
 
 // Load a specific jsonapi
-[$jsonapi, $err] = $client->JsonApi(null)->load(
-    ["id" => "example_id"], null
-);
+[$jsonapi, $err] = $client->JsonApi()->load(["id" => "example_id"]);
+print_r($jsonapi);
 ```
 
 ### Golang
@@ -143,8 +136,13 @@ $client = new CtpSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/ctp-sdk/go"
 
-client := sdk.NewCtpSDK(map[string]any{})
+client := sdk.NewCtpSDK(map[string]any{
+    "apikey": os.Getenv("CTP_APIKEY"),
+})
 
+// Load jsonapi data
+jsonapi, err := client.JsonApi(nil).Load(map[string]any{}, nil)
+fmt.Println(jsonapi)
 ```
 
 ### Ruby
@@ -152,13 +150,14 @@ client := sdk.NewCtpSDK(map[string]any{})
 ```ruby
 require_relative "Ctp_sdk"
 
-client = CtpSDK.new({})
+client = CtpSDK.new({
+  "apikey" => ENV["CTP_APIKEY"],
+})
 
 
 # Load a specific jsonapi
-jsonapi, err = client.JsonApi(nil).load(
-  { "id" => "example_id" }, nil
-)
+jsonapi, err = client.JsonApi().load({ "id" => "example_id" })
+puts jsonapi
 ```
 
 ### Lua
@@ -166,13 +165,14 @@ jsonapi, err = client.JsonApi(nil).load(
 ```lua
 local sdk = require("ctp_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("CTP_APIKEY"),
+})
 
 
 -- Load a specific jsonapi
-local jsonapi, err = client:JsonApi(nil):load(
-  { id = "example_id" }, nil
-)
+local jsonapi, err = client:JsonApi():load({ id = "example_id" })
+print(jsonapi)
 ```
 
 ## Unit testing in offline mode
@@ -191,25 +191,21 @@ const result = await client.JsonApi().load({ id: 'test01' })
 ### Python
 
 ```python
-client = CtpSDK.test(None, None)
-result, err = client.JsonApi(None).load(
-    {"id": "test01"}, None
-)
+client = CtpSDK.test()
+result, err = client.JsonApi().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = CtpSDK::test(null, null);
-[$result, $err] = $client->JsonApi(null)->load(
-    ["id" => "test01"], null
-);
+$client = CtpSDK::test();
+[$result, $err] = $client->JsonApi()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.JsonApi(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -218,19 +214,15 @@ result, err := client.JsonApi(nil).Load(
 ### Ruby
 
 ```ruby
-client = CtpSDK.test(nil, nil)
-result, err = client.JsonApi(nil).load(
-  { "id" => "test01" }, nil
-)
+client = CtpSDK.test
+result, err = client.JsonApi().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:JsonApi(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:JsonApi():load({ id = "test01" })
 ```
 
 ## How it works
@@ -334,16 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the CTP API
-
-- Upstream: [https://ctext.org](https://ctext.org)
-- API docs: [https://ctext.org/tools/api](https://ctext.org/tools/api)
-
-- Texts and metadata are copyright Chinese Text Project (ctext.org), 2006-2026
-- When citing or reusing content, link to the corresponding CTP page or to `http://ctext.org`
-- Some material is provided by institutional subscribers under separate terms; respect any per-text notices
-- See [CTP copyright FAQ](https://ctext.org/faq#copyright) for full terms
 
 ---
 

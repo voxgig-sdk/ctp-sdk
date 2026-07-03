@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -109,7 +109,7 @@ local json_api = client:JsonApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:JsonApi(nil):load({ id = "json_api_id" }, nil)
+local result, err = client:JsonApi():load({ id = "json_api_id" })
 ```
 
 ### Common Methods
@@ -155,7 +155,7 @@ local plugin = client:Plugin(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Plugin(nil):load({ id = "plugin_id" }, nil)
+local result, err = client:Plugin():load({ id = "plugin_id" })
 ```
 
 ### Common Methods
@@ -201,7 +201,7 @@ local plugin_api = client:PluginApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PluginApi(nil):load({ id = "plugin_api_id" }, nil)
+local result, err = client:PluginApi():load({ id = "plugin_api_id" })
 ```
 
 ### Common Methods

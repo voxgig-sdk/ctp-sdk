@@ -105,12 +105,14 @@ func json_apiDirectSetup(mockres any) *json_apiDirectSetupResult {
 	env := envOverride(map[string]any{
 		"CTP_TEST_JSON_API_ENTID": map[string]any{},
 		"CTP_TEST_LIVE":    "FALSE",
+		"CTP_APIKEY":       "NONE",
 	})
 
 	live := env["CTP_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["CTP_APIKEY"],
 		}
 		client := sdk.NewCtpSDK(mergedOpts)
 

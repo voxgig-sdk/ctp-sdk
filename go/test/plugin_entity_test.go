@@ -117,6 +117,7 @@ func pluginBasicSetup(extra map[string]any) *entityTestSetup {
 		"CTP_TEST_PLUGIN_ENTID": idmap,
 		"CTP_TEST_LIVE":      "FALSE",
 		"CTP_TEST_EXPLAIN":   "FALSE",
+		"CTP_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["CTP_TEST_PLUGIN_ENTID"])
@@ -127,6 +128,7 @@ func pluginBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["CTP_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["CTP_APIKEY"],
 			},
 			extra,
 		})

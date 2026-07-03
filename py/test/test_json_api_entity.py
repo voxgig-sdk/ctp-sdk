@@ -91,6 +91,7 @@ def _json_api_basic_setup(extra):
         "CTP_TEST_JSON_API_ENTID": idmap,
         "CTP_TEST_LIVE": "FALSE",
         "CTP_TEST_EXPLAIN": "FALSE",
+        "CTP_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _json_api_basic_setup(extra):
     if env.get("CTP_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("CTP_APIKEY"),
             },
             extra or {},
         ])
