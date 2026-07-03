@@ -10,7 +10,7 @@ The Python SDK for the Ctp API — an entity-oriented client following Pythonic 
 
 ## Install
 ```bash
-pip install ctp-sdk
+pip install voxgig-sdk-ctp
 ```
 
 Or install from source:

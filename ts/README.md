@@ -10,7 +10,7 @@ The TypeScript SDK for the Ctp API — a type-safe, entity-oriented client with 
 
 ## Install
 ```bash
-npm install ctp
+npm install @voxgig-sdk/ctp
 ```
 ## Tutorial: your first API call
 

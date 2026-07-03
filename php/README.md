@@ -10,7 +10,7 @@ The PHP SDK for the Ctp API — an entity-oriented client using PHP conventions.
 
 ## Install
 ```bash
-composer require voxgig/ctp-sdk
+composer require voxgig-sdk/ctp
 ```
 
 

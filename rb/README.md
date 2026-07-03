@@ -10,13 +10,13 @@ The Ruby SDK for the Ctp API — an entity-oriented client using idiomatic Ruby 
 
 ## Install
 ```bash
-gem install ctp-sdk
+gem install voxgig-sdk-ctp
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "ctp-sdk"
+gem "voxgig-sdk-ctp"
 ```
 
 Then run:

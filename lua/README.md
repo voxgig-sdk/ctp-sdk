@@ -10,7 +10,7 @@ The Lua SDK for the Ctp API — an entity-oriented client using Lua conventions.
 
 ## Install
 ```bash
-luarocks install ctp-sdk
+luarocks install voxgig-sdk-ctp
 ```
 
 If the module is not yet published, add the source directory to
