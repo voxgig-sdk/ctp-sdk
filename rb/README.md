@@ -34,8 +34,9 @@ client = CtpSDK.new({
 
 ```ruby
 begin
-  result = client.jsonapi.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare JsonApi record (raises on error).
+  jsonapi = client.JsonApi.load({ "id" => "example_id" })
+  puts jsonapi
 rescue => err
   warn "load failed: #{err}"
 end
@@ -82,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = CtpSDK.test
+client = CtpSDK.test({
+  "entity" => { "jsonapi" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.jsonapi.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+jsonapi = client.JsonApi.load({ "id" => "test01" })
+puts jsonapi
 ```
 
 ### Use a custom fetch function
@@ -243,7 +248,7 @@ API path: `/account.pl`
 
 ### JsonApi
 
-Create an instance: `const json_api = client.json_api`
+Create an instance: `json_api = client.JsonApi`
 
 #### Operations
 
@@ -260,14 +265,15 @@ Create an instance: `const json_api = client.json_api`
 
 #### Example: Load
 
-```ts
-const json_api = await client.json_api.load({ id: 'json_api_id' })
+```ruby
+# load returns the bare JsonApi record (raises on error).
+json_api = client.JsonApi.load({ "id" => "json_api_id" })
 ```
 
 
 ### Plugin
 
-Create an instance: `const plugin = client.plugin`
+Create an instance: `plugin = client.Plugin`
 
 #### Operations
 
@@ -277,14 +283,15 @@ Create an instance: `const plugin = client.plugin`
 
 #### Example: Load
 
-```ts
-const plugin = await client.plugin.load({ id: 'plugin_id' })
+```ruby
+# load returns the bare Plugin record (raises on error).
+plugin = client.Plugin.load({ "id" => "plugin_id" })
 ```
 
 
 ### PluginApi
 
-Create an instance: `const plugin_api = client.plugin_api`
+Create an instance: `plugin_api = client.PluginApi`
 
 #### Operations
 
@@ -294,8 +301,9 @@ Create an instance: `const plugin_api = client.plugin_api`
 
 #### Example: Load
 
-```ts
-const plugin_api = await client.plugin_api.load({ id: 'plugin_api_id' })
+```ruby
+# load returns the bare PluginApi record (raises on error).
+plugin_api = client.PluginApi.load({ "id" => "plugin_api_id" })
 ```
 
 
@@ -370,7 +378,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-jsonapi = client.jsonapi
+jsonapi = client.JsonApi
 jsonapi.load({ "id" => "example_id" })
 
 # jsonapi.data_get now returns the loaded jsonapi data

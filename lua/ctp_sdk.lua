@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:json_api():list() / client:json_api():load({ id = ... })
-function CtpSDK:json_api(data)
+-- Idiomatic facade: client:JsonApi():list() / client:JsonApi():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CtpSDK:JsonApi(data)
   local EntityMod = require("entity.json_api_entity")
   if data == nil then
     if self._json_api == nil then
@@ -256,15 +257,10 @@ function CtpSDK:json_api(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:json_api() instead.
-function CtpSDK:JsonApi(data)
-  local EntityMod = require("entity.json_api_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:plugin():list() / client:plugin():load({ id = ... })
-function CtpSDK:plugin(data)
+-- Idiomatic facade: client:Plugin():list() / client:Plugin():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CtpSDK:Plugin(data)
   local EntityMod = require("entity.plugin_entity")
   if data == nil then
     if self._plugin == nil then
@@ -275,15 +271,10 @@ function CtpSDK:plugin(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:plugin() instead.
-function CtpSDK:Plugin(data)
-  local EntityMod = require("entity.plugin_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:plugin_api():list() / client:plugin_api():load({ id = ... })
-function CtpSDK:plugin_api(data)
+-- Idiomatic facade: client:PluginApi():list() / client:PluginApi():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CtpSDK:PluginApi(data)
   local EntityMod = require("entity.plugin_api_entity")
   if data == nil then
     if self._plugin_api == nil then
@@ -291,12 +282,6 @@ function CtpSDK:plugin_api(data)
     end
     return self._plugin_api
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:plugin_api() instead.
-function CtpSDK:PluginApi(data)
-  local EntityMod = require("entity.plugin_api_entity")
   return EntityMod.new(self, data)
 end
 

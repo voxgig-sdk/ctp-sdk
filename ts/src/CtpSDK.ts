@@ -206,42 +206,21 @@ class CtpSDK {
 
 
 
-  _json_api?: JsonApiEntity
-
-  // Idiomatic facade: `client.json_api.list()` / `client.json_api.load({ id })`.
-  get json_api(): JsonApiEntity {
-    return (this._json_api ??= new JsonApiEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.json_api` instead. */
+  // Entity access: `client.JsonApi().list()` / `client.JsonApi().load({ id })`.
   JsonApi(data?: any) {
     const self = this
     return new JsonApiEntity(self,data)
   }
 
 
-  _plugin?: PluginEntity
-
-  // Idiomatic facade: `client.plugin.list()` / `client.plugin.load({ id })`.
-  get plugin(): PluginEntity {
-    return (this._plugin ??= new PluginEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.plugin` instead. */
+  // Entity access: `client.Plugin().list()` / `client.Plugin().load({ id })`.
   Plugin(data?: any) {
     const self = this
     return new PluginEntity(self,data)
   }
 
 
-  _plugin_api?: PluginApiEntity
-
-  // Idiomatic facade: `client.plugin_api.list()` / `client.plugin_api.load({ id })`.
-  get plugin_api(): PluginApiEntity {
-    return (this._plugin_api ??= new PluginApiEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.plugin_api` instead. */
+  // Entity access: `client.PluginApi().list()` / `client.PluginApi().load({ id })`.
   PluginApi(data?: any) {
     const self = this
     return new PluginApiEntity(self,data)

@@ -95,7 +95,7 @@ same parameters as `direct()`. Raises on error.
 ## JsonApiEntity
 
 ```ruby
-json_api = client.json_api
+json_api = client.JsonApi
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ json_api = client.json_api
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.json_api.load({ "id" => "json_api_id" })
+result = client.JsonApi.load({ "id" => "json_api_id" })
 ```
 
 ### Common Methods
@@ -148,7 +148,7 @@ Return the entity name.
 ## PluginEntity
 
 ```ruby
-plugin = client.plugin
+plugin = client.Plugin
 ```
 
 ### Operations
@@ -158,7 +158,7 @@ plugin = client.plugin
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.plugin.load({ "id" => "plugin_id" })
+result = client.Plugin.load({ "id" => "plugin_id" })
 ```
 
 ### Common Methods
@@ -194,7 +194,7 @@ Return the entity name.
 ## PluginApiEntity
 
 ```ruby
-plugin_api = client.plugin_api
+plugin_api = client.PluginApi
 ```
 
 ### Operations
@@ -204,7 +204,7 @@ plugin_api = client.plugin_api
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.plugin_api.load({ "id" => "plugin_api_id" })
+result = client.PluginApi.load({ "id" => "plugin_api_id" })
 ```
 
 ### Common Methods

@@ -208,39 +208,21 @@ class CtpSDK
   end
 
 
-  # Idiomatic facade: client.json_api.list / client.json_api.load({ "id" => ... })
-  def json_api
-    require_relative 'entity/json_api_entity'
-    @json_api ||= JsonApiEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.json_api instead.
+  # Canonical facade: client.JsonApi.list / client.JsonApi.load({ "id" => ... })
   def JsonApi(data = nil)
     require_relative 'entity/json_api_entity'
     JsonApiEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.plugin.list / client.plugin.load({ "id" => ... })
-  def plugin
-    require_relative 'entity/plugin_entity'
-    @plugin ||= PluginEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.plugin instead.
+  # Canonical facade: client.Plugin.list / client.Plugin.load({ "id" => ... })
   def Plugin(data = nil)
     require_relative 'entity/plugin_entity'
     PluginEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.plugin_api.list / client.plugin_api.load({ "id" => ... })
-  def plugin_api
-    require_relative 'entity/plugin_api_entity'
-    @plugin_api ||= PluginApiEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.plugin_api instead.
+  # Canonical facade: client.PluginApi.list / client.PluginApi.load({ "id" => ... })
   def PluginApi(data = nil)
     require_relative 'entity/plugin_api_entity'
     PluginApiEntity.new(self, data)

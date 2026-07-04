@@ -28,9 +28,9 @@ const client = new CtpSDK({
   apikey: process.env.CTP_APIKEY,
 })
 
-// Load jsonapi data
-const jsonapi = await client.jsonapi.load({})
-console.log(jsonapi.data)
+// Load jsonapi data (returns a JsonApi)
+const jsonapi = await client.JsonApi().load()
+console.log(jsonapi)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -91,8 +91,8 @@ client = CtpSDK({
 })
 
 
-# Load a specific jsonapi
-jsonapi = client.jsonapi.load({"id": "example_id"})
+# Load a specific jsonapi (returns the record, raises on error)
+jsonapi = client.JsonApi().load({"id": "example_id"})
 print(jsonapi)
 ```
 
@@ -107,8 +107,8 @@ $client = new CtpSDK([
 ]);
 
 
-// Load a specific jsonapi
-$jsonapi = $client->jsonapi()->load(["id" => "example_id"]);
+// Load a specific jsonapi (returns the bare record; throws on error)
+$jsonapi = $client->JsonApi()->load(["id" => "example_id"]);
 print_r($jsonapi);
 ```
 
@@ -136,8 +136,8 @@ client = CtpSDK.new({
 })
 
 
-# Load a specific jsonapi
-jsonapi = client.jsonapi.load({ "id" => "example_id" })
+# Load a specific jsonapi (returns the bare record; raises on error)
+jsonapi = client.JsonApi.load({ "id" => "example_id" })
 puts jsonapi
 ```
 
@@ -152,7 +152,7 @@ local client = sdk.new({
 
 
 -- Load a specific jsonapi
-local jsonapi, err = client:jsonapi():load({ id = "example_id" })
+local jsonapi, err = client:JsonApi():load({ id = "example_id" })
 print(jsonapi)
 ```
 
@@ -165,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = CtpSDK.test()
-const result = await client.jsonapi.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const jsonapi = await client.JsonApi().load({ id: 'test01' })
+// jsonapi is a bare JsonApi populated with mock data
+console.log(jsonapi)
 ```
 
 ### Python
 
 ```python
 client = CtpSDK.test()
-result = client.jsonapi.load({"id": "test01"})
+jsonapi = client.JsonApi().load({"id": "test01"})
+print(jsonapi)
 ```
 
 ### PHP
 
 ```php
-$client = CtpSDK::test();
-$result = $client->jsonapi()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = CtpSDK::test([
+    "entity" => ["jsonapi" => ["test01" => ["id" => "test01"]]],
+]);
+$jsonapi = $client->JsonApi()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -195,15 +200,18 @@ result, err := client.JsonApi(nil).Load(
 ### Ruby
 
 ```ruby
-client = CtpSDK.test
-result = client.jsonapi.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = CtpSDK.test({
+  "entity" => { "jsonapi" => { "test01" => { "id" => "test01" } } },
+})
+jsonapi = client.JsonApi.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:jsonapi():load({ id = "test01" })
+local result, err = client:JsonApi():load({ id = "test01" })
 ```
 
 ## How it works
@@ -251,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

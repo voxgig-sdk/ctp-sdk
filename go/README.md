@@ -30,7 +30,12 @@ go mod edit -replace github.com/voxgig-sdk/ctp-sdk/go=../ctp-sdk/go
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
@@ -38,31 +43,20 @@ package main
 import (
     "fmt"
     "os"
-
     sdk "github.com/voxgig-sdk/ctp-sdk/go"
-    "github.com/voxgig-sdk/ctp-sdk/go/core"
 )
 
 func main() {
     client := sdk.NewCtpSDK(map[string]any{
         "apikey": os.Getenv("CTP_APIKEY"),
     })
-```
 
-### 3. Load a jsonapi
-
-```go
-    result, err = client.JsonApi(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single jsonapi — the value is the loaded record.
+    jsonapi, err := client.JsonApi(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(jsonapi)
 }
 ```
 
@@ -113,10 +107,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.JsonApi(nil).Load(
+jsonapi, err := client.JsonApi(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(jsonapi) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -217,17 +214,24 @@ All entities implement the `CtpEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    jsonapi, err := client.JsonApi(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // jsonapi is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -285,7 +289,11 @@ Create an instance: `json_api := client.JsonApi(nil)`
 #### Example: Load
 
 ```go
-result, err := client.JsonApi(nil).Load(map[string]any{"id": "json_api_id"}, nil)
+json_api, err := client.JsonApi(nil).Load(map[string]any{"id": "json_api_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(json_api) // the loaded record
 ```
 
 
@@ -302,7 +310,11 @@ Create an instance: `plugin := client.Plugin(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Plugin(nil).Load(map[string]any{"id": "plugin_id"}, nil)
+plugin, err := client.Plugin(nil).Load(map[string]any{"id": "plugin_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(plugin) // the loaded record
 ```
 
 
@@ -319,7 +331,11 @@ Create an instance: `plugin_api := client.PluginApi(nil)`
 #### Example: Load
 
 ```go
-result, err := client.PluginApi(nil).Load(map[string]any{"id": "plugin_api_id"}, nil)
+plugin_api, err := client.PluginApi(nil).Load(map[string]any{"id": "plugin_api_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(plugin_api) // the loaded record
 ```
 
 

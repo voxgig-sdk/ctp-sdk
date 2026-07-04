@@ -220,57 +220,27 @@ class CtpSDK:
         }
 
 
-    @property
-    def json_api(self):
-        """Idiomatic facade: client.json_api.list() / client.json_api.load({"id": ...})."""
-        from entity.json_api_entity import JsonApiEntity
-        cached = getattr(self, "_json_api", None)
-        if cached is None:
-            cached = JsonApiEntity(self, None)
-            self._json_api = cached
-        return cached
-
-    def JsonApi(self, data=None):
-        # Deprecated: use client.json_api instead.
+    def JsonApi(self, data=None) -> "JsonApiEntity":
+        """Entity factory: client.JsonApi().list({}) / client.JsonApi().load({"id": ...})."""
         from entity.json_api_entity import JsonApiEntity
         return JsonApiEntity(self, data)
 
 
-    @property
-    def plugin(self):
-        """Idiomatic facade: client.plugin.list() / client.plugin.load({"id": ...})."""
-        from entity.plugin_entity import PluginEntity
-        cached = getattr(self, "_plugin", None)
-        if cached is None:
-            cached = PluginEntity(self, None)
-            self._plugin = cached
-        return cached
-
-    def Plugin(self, data=None):
-        # Deprecated: use client.plugin instead.
+    def Plugin(self, data=None) -> "PluginEntity":
+        """Entity factory: client.Plugin().list({}) / client.Plugin().load({"id": ...})."""
         from entity.plugin_entity import PluginEntity
         return PluginEntity(self, data)
 
 
-    @property
-    def plugin_api(self):
-        """Idiomatic facade: client.plugin_api.list() / client.plugin_api.load({"id": ...})."""
-        from entity.plugin_api_entity import PluginApiEntity
-        cached = getattr(self, "_plugin_api", None)
-        if cached is None:
-            cached = PluginApiEntity(self, None)
-            self._plugin_api = cached
-        return cached
-
-    def PluginApi(self, data=None):
-        # Deprecated: use client.plugin_api instead.
+    def PluginApi(self, data=None) -> "PluginApiEntity":
+        """Entity factory: client.PluginApi().list({}) / client.PluginApi().load({"id": ...})."""
         from entity.plugin_api_entity import PluginApiEntity
         return PluginApiEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "CtpSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class CtpSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.json_api_entity import JsonApiEntity
+    from entity.plugin_entity import PluginEntity
+    from entity.plugin_api_entity import PluginApiEntity

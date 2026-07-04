@@ -134,7 +134,7 @@ Alias for `CtpSDK.test()`.
 ## JsonApiEntity
 
 ```ts
-const json_api = client.json_api
+const json_api = client.JsonApi()
 ```
 
 ### Fields
@@ -151,7 +151,7 @@ const json_api = client.json_api
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.json_api.load({ id: 'json_api_id' })
+const result = await client.JsonApi().load({ id: 'json_api_id' })
 ```
 
 ### Common Methods
@@ -185,7 +185,7 @@ Return a copy of the entity options.
 ## PluginEntity
 
 ```ts
-const plugin = client.plugin
+const plugin = client.Plugin()
 ```
 
 ### Operations
@@ -195,7 +195,7 @@ const plugin = client.plugin
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.plugin.load({ id: 'plugin_id' })
+const result = await client.Plugin().load({ id: 'plugin_id' })
 ```
 
 ### Common Methods
@@ -229,7 +229,7 @@ Return a copy of the entity options.
 ## PluginApiEntity
 
 ```ts
-const plugin_api = client.plugin_api
+const plugin_api = client.PluginApi()
 ```
 
 ### Operations
@@ -239,7 +239,7 @@ const plugin_api = client.plugin_api
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.plugin_api.load({ id: 'plugin_api_id' })
+const result = await client.PluginApi().load({ id: 'plugin_api_id' })
 ```
 
 ### Common Methods

@@ -36,9 +36,9 @@ local client = sdk.new({
 ### 3. Load a jsonapi
 
 ```lua
-local result, err = client:jsonapi():load({ id = "example_id" })
+local jsonapi, err = client:JsonApi():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(jsonapi)
 ```
 
 
@@ -84,8 +84,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:jsonapi():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:JsonApi():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -189,17 +189,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local json_api, err = client:JsonApi():load({ id = "example_id" })
+    if err then error(err) end
+    -- json_api is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -239,7 +244,7 @@ API path: `/account.pl`
 
 ### JsonApi
 
-Create an instance: `const json_api = client.json_api`
+Create an instance: `local json_api = client:JsonApi(nil)`
 
 #### Operations
 
@@ -256,14 +261,14 @@ Create an instance: `const json_api = client.json_api`
 
 #### Example: Load
 
-```ts
-const json_api = await client.json_api.load({ id: 'json_api_id' })
+```lua
+local json_api, err = client:JsonApi():load({ id = "json_api_id" })
 ```
 
 
 ### Plugin
 
-Create an instance: `const plugin = client.plugin`
+Create an instance: `local plugin = client:Plugin(nil)`
 
 #### Operations
 
@@ -273,14 +278,14 @@ Create an instance: `const plugin = client.plugin`
 
 #### Example: Load
 
-```ts
-const plugin = await client.plugin.load({ id: 'plugin_id' })
+```lua
+local plugin, err = client:Plugin():load({ id = "plugin_id" })
 ```
 
 
 ### PluginApi
 
-Create an instance: `const plugin_api = client.plugin_api`
+Create an instance: `local plugin_api = client:PluginApi(nil)`
 
 #### Operations
 
@@ -290,8 +295,8 @@ Create an instance: `const plugin_api = client.plugin_api`
 
 #### Example: Load
 
-```ts
-const plugin_api = await client.plugin_api.load({ id: 'plugin_api_id' })
+```lua
+local plugin_api, err = client:PluginApi():load({ id = "plugin_api_id" })
 ```
 
 
@@ -366,7 +371,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local jsonapi = client:jsonapi()
+local jsonapi = client:JsonApi()
 jsonapi:load({ id = "example_id" })
 
 -- jsonapi:data_get() now returns the loaded jsonapi data

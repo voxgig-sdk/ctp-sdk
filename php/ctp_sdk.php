@@ -233,10 +233,10 @@ class CtpSDK
 
     private $_json_api = null;
 
-    // Idiomatic facade: $client->json_api()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias JsonApi() (PHP method
-    // names are case-insensitive).
-    public function json_api($data = null)
+    // Canonical facade: $client->JsonApi()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->json_api()
+    // resolves here too.
+    public function JsonApi($data = null)
     {
         require_once __DIR__ . '/entity/json_api_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class CtpSDK
 
     private $_plugin = null;
 
-    // Idiomatic facade: $client->plugin()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Plugin() (PHP method
-    // names are case-insensitive).
-    public function plugin($data = null)
+    // Canonical facade: $client->Plugin()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->plugin()
+    // resolves here too.
+    public function Plugin($data = null)
     {
         require_once __DIR__ . '/entity/plugin_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class CtpSDK
 
     private $_plugin_api = null;
 
-    // Idiomatic facade: $client->plugin_api()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias PluginApi() (PHP method
-    // names are case-insensitive).
-    public function plugin_api($data = null)
+    // Canonical facade: $client->PluginApi()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->plugin_api()
+    // resolves here too.
+    public function PluginApi($data = null)
     {
         require_once __DIR__ . '/entity/plugin_api_entity.php';
         if ($data === null) {
