@@ -194,6 +194,7 @@ local function make_config()
                       ["orig"] = "plugin_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                 },

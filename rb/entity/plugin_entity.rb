@@ -45,6 +45,7 @@ class PluginEntity
     end
   end
 
+  # @return [Plugin, Hash] the current Plugin data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class PluginEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Plugin fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Plugin.
+  #
+  # @param reqmatch [PluginLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Plugin, Hash] the loaded Plugin; raises CtpError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

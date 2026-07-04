@@ -49,8 +49,7 @@ class TestPluginApiEntity:
         # LOAD
         plugin_api_ref01_ent = client.PluginApi(None)
         plugin_api_ref01_match_dt0 = {}
-        plugin_api_ref01_data_dt0_loaded, err = plugin_api_ref01_ent.load(plugin_api_ref01_match_dt0, None)
-        assert err is None
+        plugin_api_ref01_data_dt0_loaded = plugin_api_ref01_ent.load(plugin_api_ref01_match_dt0, None)
         assert plugin_api_ref01_data_dt0_loaded is not None
 
 

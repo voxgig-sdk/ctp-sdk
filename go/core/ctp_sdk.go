@@ -245,16 +245,25 @@ func (sdk *CtpSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// JsonApi returns a JsonApi entity bound to this client.
+// Idiomatic usage: client.JsonApi(nil).List(nil, nil) or
+// client.JsonApi(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CtpSDK) JsonApi(data map[string]any) CtpEntity {
 	return NewJsonApiEntityFunc(sdk, data)
 }
 
 
+// Plugin returns a Plugin entity bound to this client.
+// Idiomatic usage: client.Plugin(nil).List(nil, nil) or
+// client.Plugin(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CtpSDK) Plugin(data map[string]any) CtpEntity {
 	return NewPluginEntityFunc(sdk, data)
 }
 
 
+// PluginApi returns a PluginApi entity bound to this client.
+// Idiomatic usage: client.PluginApi(nil).List(nil, nil) or
+// client.PluginApi(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CtpSDK) PluginApi(data map[string]any) CtpEntity {
 	return NewPluginApiEntityFunc(sdk, data)
 }

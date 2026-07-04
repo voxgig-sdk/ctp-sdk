@@ -49,8 +49,7 @@ class PluginApiEntityTest extends TestCase
         // LOAD
         $plugin_api_ref01_ent = $client->PluginApi(null);
         $plugin_api_ref01_match_dt0 = [];
-        [$plugin_api_ref01_data_dt0_loaded, $err] = $plugin_api_ref01_ent->load($plugin_api_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $plugin_api_ref01_data_dt0_loaded = $plugin_api_ref01_ent->load($plugin_api_ref01_match_dt0, null);
         $this->assertNotNull($plugin_api_ref01_data_dt0_loaded);
 
     }

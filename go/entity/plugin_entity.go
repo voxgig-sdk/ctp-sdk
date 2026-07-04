@@ -85,6 +85,27 @@ func (e *PluginEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Plugin; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *PluginEntity) DataTyped(data ...Plugin) Plugin {
+	if len(data) > 0 {
+		return typedFrom[Plugin](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Plugin](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Plugin (all fields
+// optional at the wire level).
+func (e *PluginEntity) MatchTyped(match ...Plugin) Plugin {
+	if len(match) > 0 {
+		return typedFrom[Plugin](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Plugin](e.Match())
+}
+
 
 func (e *PluginEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *PluginEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, 
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// PluginLoadMatch and returns an Plugin. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *PluginEntity) LoadTyped(reqmatch PluginLoadMatch, ctrl map[string]any) (Plugin, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Plugin{}, err
+	}
+	return typedFrom[Plugin](res), nil
 }
 
 

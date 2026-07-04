@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PluginLoadMatch
+---@param ctrl? table
+---@return Plugin
+---@return string? err
 function PluginEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

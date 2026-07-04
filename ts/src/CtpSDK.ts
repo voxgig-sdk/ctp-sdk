@@ -4,6 +4,8 @@ import { JsonApiEntity } from './entity/JsonApiEntity'
 import { PluginEntity } from './entity/PluginEntity'
 import { PluginApiEntity } from './entity/PluginApiEntity'
 
+export type * from './CtpTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class CtpSDK {
 
 
 
+  _json_api?: JsonApiEntity
+
+  // Idiomatic facade: `client.json_api.list()` / `client.json_api.load({ id })`.
+  get json_api(): JsonApiEntity {
+    return (this._json_api ??= new JsonApiEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.json_api` instead. */
   JsonApi(data?: any) {
     const self = this
     return new JsonApiEntity(self,data)
   }
 
 
+  _plugin?: PluginEntity
+
+  // Idiomatic facade: `client.plugin.list()` / `client.plugin.load({ id })`.
+  get plugin(): PluginEntity {
+    return (this._plugin ??= new PluginEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.plugin` instead. */
   Plugin(data?: any) {
     const self = this
     return new PluginEntity(self,data)
   }
 
 
+  _plugin_api?: PluginApiEntity
+
+  // Idiomatic facade: `client.plugin_api.list()` / `client.plugin_api.load({ id })`.
+  get plugin_api(): PluginApiEntity {
+    return (this._plugin_api ??= new PluginApiEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.plugin_api` instead. */
   PluginApi(data?: any) {
     const self = this
     return new PluginApiEntity(self,data)

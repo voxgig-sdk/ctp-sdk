@@ -62,9 +62,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -78,14 +80,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -93,7 +95,7 @@ same parameters as `direct()`.
 ## JsonApiEntity
 
 ```ruby
-json_api = client.JsonApi
+json_api = client.json_api
 ```
 
 ### Fields
@@ -105,12 +107,12 @@ json_api = client.JsonApi
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.JsonApi.load({ "id" => "json_api_id" })
+result = client.json_api.load({ "id" => "json_api_id" })
 ```
 
 ### Common Methods
@@ -146,17 +148,17 @@ Return the entity name.
 ## PluginEntity
 
 ```ruby
-plugin = client.Plugin
+plugin = client.plugin
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Plugin.load({ "id" => "plugin_id" })
+result = client.plugin.load({ "id" => "plugin_id" })
 ```
 
 ### Common Methods
@@ -192,17 +194,17 @@ Return the entity name.
 ## PluginApiEntity
 
 ```ruby
-plugin_api = client.PluginApi
+plugin_api = client.plugin_api
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.PluginApi.load({ "id" => "plugin_api_id" })
+result = client.plugin_api.load({ "id" => "plugin_api_id" })
 ```
 
 ### Common Methods

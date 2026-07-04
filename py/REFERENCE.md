@@ -62,9 +62,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -77,11 +77,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## JsonApiEntity
 
 ```python
-json_api = client.JsonApi()
+json_api = client.json_api
 ```
 
 ### Fields
@@ -101,12 +101,12 @@ json_api = client.JsonApi()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.JsonApi().load({"id": "json_api_id"})
+result = client.json_api.load({"id": "json_api_id"})
 ```
 
 ### Common Methods
@@ -141,17 +141,17 @@ Return the entity name.
 ## PluginEntity
 
 ```python
-plugin = client.Plugin()
+plugin = client.plugin
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Plugin().load({"id": "plugin_id"})
+result = client.plugin.load({"id": "plugin_id"})
 ```
 
 ### Common Methods
@@ -186,17 +186,17 @@ Return the entity name.
 ## PluginApiEntity
 
 ```python
-plugin_api = client.PluginApi()
+plugin_api = client.plugin_api
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.PluginApi().load({"id": "plugin_api_id"})
+result = client.plugin_api.load({"id": "plugin_api_id"})
 ```
 
 ### Common Methods

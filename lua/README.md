@@ -9,12 +9,9 @@ The Lua SDK for the Ctp API — an entity-oriented client using Lua conventions.
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-ctp
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/ctp-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -39,7 +36,7 @@ local client = sdk.new({
 ### 3. Load a jsonapi
 
 ```lua
-local result, err = client:JsonApi():load({ id = "example_id" })
+local result, err = client:jsonapi():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Ctp():load({ id = "test01" })
+local result, err = client:jsonapi():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -242,7 +239,7 @@ API path: `/account.pl`
 
 ### JsonApi
 
-Create an instance: `const json_api = client.JsonApi()`
+Create an instance: `const json_api = client.json_api`
 
 #### Operations
 
@@ -260,13 +257,13 @@ Create an instance: `const json_api = client.JsonApi()`
 #### Example: Load
 
 ```ts
-const json_api = await client.JsonApi().load({ id: 'json_api_id' })
+const json_api = await client.json_api.load({ id: 'json_api_id' })
 ```
 
 
 ### Plugin
 
-Create an instance: `const plugin = client.Plugin()`
+Create an instance: `const plugin = client.plugin`
 
 #### Operations
 
@@ -277,13 +274,13 @@ Create an instance: `const plugin = client.Plugin()`
 #### Example: Load
 
 ```ts
-const plugin = await client.Plugin().load({ id: 'plugin_id' })
+const plugin = await client.plugin.load({ id: 'plugin_id' })
 ```
 
 
 ### PluginApi
 
-Create an instance: `const plugin_api = client.PluginApi()`
+Create an instance: `const plugin_api = client.plugin_api`
 
 #### Operations
 
@@ -294,7 +291,7 @@ Create an instance: `const plugin_api = client.PluginApi()`
 #### Example: Load
 
 ```ts
-const plugin_api = await client.PluginApi().load({ id: 'plugin_api_id' })
+const plugin_api = await client.plugin_api.load({ id: 'plugin_api_id' })
 ```
 
 
@@ -369,11 +366,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local jsonapi = client:jsonapi()
+jsonapi:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- jsonapi:data_get() now returns the loaded jsonapi data
+-- jsonapi:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

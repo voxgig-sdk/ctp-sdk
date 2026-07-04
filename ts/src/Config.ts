@@ -228,7 +228,8 @@ class Config {
                     "name": "id",
                     "orig": "plugin_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

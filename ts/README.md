@@ -9,9 +9,12 @@ The TypeScript SDK for the Ctp API — a type-safe, entity-oriented client with 
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/ctp
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/ctp-sdk/releases](https://github.com/voxgig-sdk/ctp-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,7 +23,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CtpSDK } from 'ctp'
+import { CtpSDK } from '@voxgig-sdk/ctp'
 
 const client = new CtpSDK({
   apikey: process.env.CTP_APIKEY,
@@ -30,7 +33,7 @@ const client = new CtpSDK({
 ### 3. Load a jsonapi
 
 ```ts
-const result = await client.JsonApi().load({ id: 'example_id' })
+const result = await client.jsonapi.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CtpSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.jsonapi.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.jsonapi
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -287,7 +290,7 @@ API path: `/account.pl`
 
 ### JsonApi
 
-Create an instance: `const json_api = client.JsonApi()`
+Create an instance: `const json_api = client.json_api`
 
 #### Operations
 
@@ -305,13 +308,13 @@ Create an instance: `const json_api = client.JsonApi()`
 #### Example: Load
 
 ```ts
-const json_api = await client.JsonApi().load({ id: 'json_api_id' })
+const json_api = await client.json_api.load({ id: 'json_api_id' })
 ```
 
 
 ### Plugin
 
-Create an instance: `const plugin = client.Plugin()`
+Create an instance: `const plugin = client.plugin`
 
 #### Operations
 
@@ -322,13 +325,13 @@ Create an instance: `const plugin = client.Plugin()`
 #### Example: Load
 
 ```ts
-const plugin = await client.Plugin().load({ id: 'plugin_id' })
+const plugin = await client.plugin.load({ id: 'plugin_id' })
 ```
 
 
 ### PluginApi
 
-Create an instance: `const plugin_api = client.PluginApi()`
+Create an instance: `const plugin_api = client.plugin_api`
 
 #### Operations
 
@@ -339,7 +342,7 @@ Create an instance: `const plugin_api = client.PluginApi()`
 #### Example: Load
 
 ```ts
-const plugin_api = await client.PluginApi().load({ id: 'plugin_api_id' })
+const plugin_api = await client.plugin_api.load({ id: 'plugin_api_id' })
 ```
 
 
@@ -400,7 +403,7 @@ ctp/
 Import the SDK from the package root:
 
 ```ts
-import { CtpSDK } from 'ctp'
+import { CtpSDK } from '@voxgig-sdk/ctp'
 ```
 
 ### Entity state
@@ -410,11 +413,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const jsonapi = client.jsonapi
+await jsonapi.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// jsonapi.data() now returns the loaded jsonapi data
+// jsonapi.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

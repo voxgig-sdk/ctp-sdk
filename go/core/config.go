@@ -194,6 +194,7 @@ func MakeConfig() map[string]any {
 											"orig": "plugin_id",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},

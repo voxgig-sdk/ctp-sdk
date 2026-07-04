@@ -200,6 +200,7 @@ class CtpConfig
                         'orig' => 'plugin_id',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

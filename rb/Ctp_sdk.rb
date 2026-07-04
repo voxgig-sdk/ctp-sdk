@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Ctp_types'
+
 
 class CtpSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class CtpSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class CtpSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue CtpError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = CtpHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class CtpSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,28 +198,49 @@ class CtpSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.json_api.list / client.json_api.load({ "id" => ... })
+  def json_api
+    require_relative 'entity/json_api_entity'
+    @json_api ||= JsonApiEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.json_api instead.
   def JsonApi(data = nil)
     require_relative 'entity/json_api_entity'
     JsonApiEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.plugin.list / client.plugin.load({ "id" => ... })
+  def plugin
+    require_relative 'entity/plugin_entity'
+    @plugin ||= PluginEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.plugin instead.
   def Plugin(data = nil)
     require_relative 'entity/plugin_entity'
     PluginEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.plugin_api.list / client.plugin_api.load({ "id" => ... })
+  def plugin_api
+    require_relative 'entity/plugin_api_entity'
+    @plugin_api ||= PluginApiEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.plugin_api instead.
   def PluginApi(data = nil)
     require_relative 'entity/plugin_api_entity'
     PluginApiEntity.new(self, data)

@@ -49,8 +49,7 @@ class TestJsonApiEntity:
         # LOAD
         json_api_ref01_ent = client.JsonApi(None)
         json_api_ref01_match_dt0 = {}
-        json_api_ref01_data_dt0_loaded, err = json_api_ref01_ent.load(json_api_ref01_match_dt0, None)
-        assert err is None
+        json_api_ref01_data_dt0_loaded = json_api_ref01_ent.load(json_api_ref01_match_dt0, None)
         assert json_api_ref01_data_dt0_loaded is not None
 
 

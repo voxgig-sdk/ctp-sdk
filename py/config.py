@@ -195,6 +195,7 @@ def make_config():
                       "orig": "plugin_id",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

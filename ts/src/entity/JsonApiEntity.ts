@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  JsonApi,
+  JsonApiLoadMatch,
+} from '../CtpTypes'
 
 // TODO: needs Entity superclass
-class JsonApiEntity extends CtpEntityBase {
+class JsonApiEntity extends CtpEntityBase<JsonApi> {
 
   constructor(client: CtpSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class JsonApiEntity extends CtpEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: JsonApiLoadMatch, ctrl?: Control): Promise<JsonApi> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class JsonApiEntity extends CtpEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<JsonApi> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

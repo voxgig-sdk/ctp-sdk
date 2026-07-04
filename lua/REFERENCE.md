@@ -92,7 +92,7 @@ same parameters as `direct()`.
 ## JsonApiEntity
 
 ```lua
-local json_api = client:JsonApi(nil)
+local json_api = client:json_api(nil)
 ```
 
 ### Fields
@@ -109,7 +109,7 @@ local json_api = client:JsonApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:JsonApi():load({ id = "json_api_id" })
+local result, err = client:json_api():load({ id = "json_api_id" })
 ```
 
 ### Common Methods
@@ -145,7 +145,7 @@ Return the entity name.
 ## PluginEntity
 
 ```lua
-local plugin = client:Plugin(nil)
+local plugin = client:plugin(nil)
 ```
 
 ### Operations
@@ -155,7 +155,7 @@ local plugin = client:Plugin(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Plugin():load({ id = "plugin_id" })
+local result, err = client:plugin():load({ id = "plugin_id" })
 ```
 
 ### Common Methods
@@ -191,7 +191,7 @@ Return the entity name.
 ## PluginApiEntity
 
 ```lua
-local plugin_api = client:PluginApi(nil)
+local plugin_api = client:plugin_api(nil)
 ```
 
 ### Operations
@@ -201,7 +201,7 @@ local plugin_api = client:PluginApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PluginApi():load({ id = "plugin_api_id" })
+local result, err = client:plugin_api():load({ id = "plugin_api_id" })
 ```
 
 ### Common Methods

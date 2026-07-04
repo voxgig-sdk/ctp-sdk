@@ -244,18 +244,57 @@ end
 
 
 
+-- Idiomatic facade: client:json_api():list() / client:json_api():load({ id = ... })
+function CtpSDK:json_api(data)
+  local EntityMod = require("entity.json_api_entity")
+  if data == nil then
+    if self._json_api == nil then
+      self._json_api = EntityMod.new(self, nil)
+    end
+    return self._json_api
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:json_api() instead.
 function CtpSDK:JsonApi(data)
   local EntityMod = require("entity.json_api_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:plugin():list() / client:plugin():load({ id = ... })
+function CtpSDK:plugin(data)
+  local EntityMod = require("entity.plugin_entity")
+  if data == nil then
+    if self._plugin == nil then
+      self._plugin = EntityMod.new(self, nil)
+    end
+    return self._plugin
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:plugin() instead.
 function CtpSDK:Plugin(data)
   local EntityMod = require("entity.plugin_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:plugin_api():list() / client:plugin_api():load({ id = ... })
+function CtpSDK:plugin_api(data)
+  local EntityMod = require("entity.plugin_api_entity")
+  if data == nil then
+    if self._plugin_api == nil then
+      self._plugin_api = EntityMod.new(self, nil)
+    end
+    return self._plugin_api
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:plugin_api() instead.
 function CtpSDK:PluginApi(data)
   local EntityMod = require("entity.plugin_api_entity")
   return EntityMod.new(self, data)

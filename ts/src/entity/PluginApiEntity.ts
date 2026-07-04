@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  PluginApi,
+  PluginApiLoadMatch,
+} from '../CtpTypes'
 
 // TODO: needs Entity superclass
-class PluginApiEntity extends CtpEntityBase {
+class PluginApiEntity extends CtpEntityBase<PluginApi> {
 
   constructor(client: CtpSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class PluginApiEntity extends CtpEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: PluginApiLoadMatch, ctrl?: Control): Promise<PluginApi> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class PluginApiEntity extends CtpEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<PluginApi> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

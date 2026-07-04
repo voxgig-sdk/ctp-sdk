@@ -55,6 +55,9 @@ class PluginApiEntity
         return new PluginApiEntity($this->_client, $opts);
     }
 
+    /**
+     * @param PluginApi|array $args PluginApi data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class PluginApiEntity
         }
     }
 
+    /**
+     * @return PluginApi|array The current PluginApi data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of PluginApi fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class PluginApiEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of PluginApi fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class PluginApiEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single PluginApi.
+     *
+     * @param PluginApiLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed PluginApiLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return PluginApi|array The loaded PluginApi as an assoc-array at the
+     *   SDK boundary; throws CtpError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -117,7 +138,7 @@ class PluginApiEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

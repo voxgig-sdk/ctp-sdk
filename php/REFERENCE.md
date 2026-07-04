@@ -64,7 +64,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -78,11 +81,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -90,7 +94,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## JsonApiEntity
 
 ```php
-$json_api = $client->JsonApi();
+$json_api = $client->json_api();
 ```
 
 ### Fields
@@ -102,12 +106,12 @@ $json_api = $client->JsonApi();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->JsonApi()->load(["id" => "json_api_id"]);
+$result = $client->json_api()->load(["id" => "json_api_id"]);
 ```
 
 ### Common Methods
@@ -143,17 +147,17 @@ Return the entity name.
 ## PluginEntity
 
 ```php
-$plugin = $client->Plugin();
+$plugin = $client->plugin();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Plugin()->load(["id" => "plugin_id"]);
+$result = $client->plugin()->load(["id" => "plugin_id"]);
 ```
 
 ### Common Methods
@@ -189,17 +193,17 @@ Return the entity name.
 ## PluginApiEntity
 
 ```php
-$plugin_api = $client->PluginApi();
+$plugin_api = $client->plugin_api();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->PluginApi()->load(["id" => "plugin_api_id"]);
+$result = $client->plugin_api()->load(["id" => "plugin_api_id"]);
 ```
 
 ### Common Methods

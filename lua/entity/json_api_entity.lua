@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch JsonApiLoadMatch
+---@param ctrl? table
+---@return JsonApi
+---@return string? err
 function JsonApiEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

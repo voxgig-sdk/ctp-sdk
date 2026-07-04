@@ -42,8 +42,7 @@ class PluginEntityTest < Minitest::Test
     # LOAD
     plugin_ref01_ent = client.Plugin(nil)
     plugin_ref01_match_dt0 = {}
-    plugin_ref01_data_dt0_loaded, err = plugin_ref01_ent.load(plugin_ref01_match_dt0, nil)
-    assert_nil err
+    plugin_ref01_data_dt0_loaded = plugin_ref01_ent.load(plugin_ref01_match_dt0, nil)
     assert !plugin_ref01_data_dt0_loaded.nil?
 
   end

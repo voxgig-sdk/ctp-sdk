@@ -49,8 +49,7 @@ class JsonApiEntityTest extends TestCase
         // LOAD
         $json_api_ref01_ent = $client->JsonApi(null);
         $json_api_ref01_match_dt0 = [];
-        [$json_api_ref01_data_dt0_loaded, $err] = $json_api_ref01_ent->load($json_api_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $json_api_ref01_data_dt0_loaded = $json_api_ref01_ent->load($json_api_ref01_match_dt0, null);
         $this->assertNotNull($json_api_ref01_data_dt0_loaded);
 
     }
