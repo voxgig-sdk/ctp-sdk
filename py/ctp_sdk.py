@@ -221,19 +221,19 @@ class CtpSDK:
 
 
     def JsonApi(self, data=None) -> "JsonApiEntity":
-        """Entity factory: client.JsonApi().list({}) / client.JsonApi().load({"id": ...})."""
+        """Entity factory: client.JsonApi().list() / client.JsonApi().load({"id": ...})."""
         from entity.json_api_entity import JsonApiEntity
         return JsonApiEntity(self, data)
 
 
     def Plugin(self, data=None) -> "PluginEntity":
-        """Entity factory: client.Plugin().list({}) / client.Plugin().load({"id": ...})."""
+        """Entity factory: client.Plugin().list() / client.Plugin().load({"id": ...})."""
         from entity.plugin_entity import PluginEntity
         return PluginEntity(self, data)
 
 
     def PluginApi(self, data=None) -> "PluginApiEntity":
-        """Entity factory: client.PluginApi().list({}) / client.PluginApi().load({"id": ...})."""
+        """Entity factory: client.PluginApi().list() / client.PluginApi().load({"id": ...})."""
         from entity.plugin_api_entity import PluginApiEntity
         return PluginApiEntity(self, data)
 

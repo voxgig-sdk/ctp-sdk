@@ -10,7 +10,10 @@ export interface JsonApi {
   urn?: string
 }
 
-export type JsonApiLoadMatch = Partial<JsonApi>
+export interface JsonApiLoadMatch {
+  url?: string
+  urn?: string
+}
 
 export interface Plugin {
 }
@@ -22,5 +25,6 @@ export interface PluginLoadMatch {
 export interface PluginApi {
 }
 
-export type PluginApiLoadMatch = Partial<PluginApi>
+export interface PluginApiLoadMatch {
+}
 

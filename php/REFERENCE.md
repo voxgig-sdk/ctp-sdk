@@ -54,11 +54,11 @@ Create a new `PluginEntity` instance. Pass `null` for no initial data.
 
 Create a new `PluginApiEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): CtpUtility`
 
 Return a copy of the SDK utility object.
 
@@ -101,8 +101,8 @@ $json_api = $client->JsonApi();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `string` | No |  |
+| `urn` | `string` | No |  |
 
 ### Operations
 
@@ -111,24 +111,24 @@ $json_api = $client->JsonApi();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->JsonApi()->load(["id" => "json_api_id"]);
+$result = $client->JsonApi()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -137,7 +137,7 @@ Set the entity match criteria.
 Create a new `JsonApiEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -162,19 +162,19 @@ $result = $client->Plugin()->load(["id" => "plugin_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -183,7 +183,7 @@ Set the entity match criteria.
 Create a new `PluginEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -203,24 +203,24 @@ $plugin_api = $client->PluginApi();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->PluginApi()->load(["id" => "plugin_api_id"]);
+$result = $client->PluginApi()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -229,7 +229,7 @@ Set the entity match criteria.
 Create a new `PluginApiEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

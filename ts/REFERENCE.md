@@ -141,8 +141,8 @@ const json_api = client.JsonApi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `string` | No |  |
+| `urn` | `string` | No |  |
 
 ### Operations
 
@@ -151,7 +151,7 @@ const json_api = client.JsonApi()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.JsonApi().load({ id: 'json_api_id' })
+const result = await client.JsonApi().load()
 ```
 
 ### Common Methods
@@ -239,7 +239,7 @@ const plugin_api = client.PluginApi()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.PluginApi().load({ id: 'plugin_api_id' })
+const result = await client.PluginApi().load()
 ```
 
 ### Common Methods

@@ -96,8 +96,8 @@ json_api = client.JsonApi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `str` | No |  |
+| `urn` | `str` | No |  |
 
 ### Operations
 
@@ -106,7 +106,7 @@ json_api = client.JsonApi()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.JsonApi().load({"id": "json_api_id"})
+result = client.JsonApi().load()
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ plugin_api = client.PluginApi()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.PluginApi().load({"id": "plugin_api_id"})
+result = client.PluginApi().load()
 ```
 
 ### Common Methods

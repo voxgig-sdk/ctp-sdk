@@ -8,7 +8,7 @@ Complete API reference for the Ctp Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'ctp_sdk'
+require_relative 'Ctp_sdk'
 
 client = CtpSDK.new(options)
 ```
@@ -102,8 +102,8 @@ json_api = client.JsonApi
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `String` | No |  |
+| `urn` | `String` | No |  |
 
 ### Operations
 
@@ -112,7 +112,7 @@ json_api = client.JsonApi
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.JsonApi.load({ "id" => "json_api_id" })
+result = client.JsonApi.load()
 ```
 
 ### Common Methods
@@ -204,7 +204,7 @@ plugin_api = client.PluginApi
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.PluginApi.load({ "id" => "plugin_api_id" })
+result = client.PluginApi.load()
 ```
 
 ### Common Methods

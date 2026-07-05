@@ -19,7 +19,7 @@ class JsonApi
     public ?string $urn = null;
 }
 
-/** Match filter for JsonApi#load (any subset of JsonApi fields). */
+/** Request payload for JsonApi#load. */
 class JsonApiLoadMatch
 {
     public ?string $url = null;
@@ -42,7 +42,7 @@ class PluginApi
 {
 }
 
-/** Match filter for PluginApi#load (any subset of PluginApi fields). */
+/** Request payload for PluginApi#load. */
 class PluginApiLoadMatch
 {
 }

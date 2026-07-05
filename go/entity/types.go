@@ -14,8 +14,7 @@ type JsonApi struct {
 	Urn *string `json:"urn,omitempty"`
 }
 
-// JsonApiLoadMatch mirrors the json_api fields as an all-optional match
-// filter (Go analog of Partial<JsonApi>).
+// JsonApiLoadMatch is the typed request payload for JsonApi.LoadTyped.
 type JsonApiLoadMatch struct {
 	Url *string `json:"url,omitempty"`
 	Urn *string `json:"urn,omitempty"`
@@ -34,8 +33,7 @@ type PluginLoadMatch struct {
 type PluginApi struct {
 }
 
-// PluginApiLoadMatch mirrors the plugin_api fields as an all-optional match
-// filter (Go analog of Partial<PluginApi>).
+// PluginApiLoadMatch is the typed request payload for PluginApi.LoadTyped.
 type PluginApiLoadMatch struct {
 }
 

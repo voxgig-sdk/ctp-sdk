@@ -106,8 +106,8 @@ json_api := client.JsonApi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `string` | No |  |
+| `urn` | `string` | No |  |
 
 ### Operations
 
@@ -116,7 +116,7 @@ json_api := client.JsonApi(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.JsonApi(nil).Load(map[string]any{"id": "json_api_id"}, nil)
+result, err := client.JsonApi(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ plugin_api := client.PluginApi(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.PluginApi(nil).Load(map[string]any{"id": "plugin_api_id"}, nil)
+result, err := client.PluginApi(nil).Load(nil, nil)
 ```
 
 ### Common Methods

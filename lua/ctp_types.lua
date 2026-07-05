@@ -11,6 +11,8 @@
 ---@field urn? string
 
 ---@class JsonApiLoadMatch
+---@field url? string
+---@field urn? string
 
 ---@class Plugin
 

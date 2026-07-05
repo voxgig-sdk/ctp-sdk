@@ -99,8 +99,8 @@ local json_api = client:JsonApi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | ``$STRING`` | No |  |
-| `urn` | ``$STRING`` | No |  |
+| `url` | `string` | No |  |
+| `urn` | `string` | No |  |
 
 ### Operations
 
@@ -109,7 +109,7 @@ local json_api = client:JsonApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:JsonApi():load({ id = "json_api_id" })
+local result, err = client:JsonApi():load()
 ```
 
 ### Common Methods
@@ -201,7 +201,7 @@ local plugin_api = client:PluginApi(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PluginApi():load({ id = "plugin_api_id" })
+local result, err = client:PluginApi():load()
 ```
 
 ### Common Methods
