@@ -53,12 +53,12 @@ func main() {
         "apikey": os.Getenv("CTP_APIKEY"),
     })
 
-    // Load a single jsonapi — the value is the loaded record.
-    jsonapi, err := client.JsonApi(nil).Load(nil, nil)
+    // Load a single jsonApi — the value is the loaded record.
+    jsonApi, err := client.JsonApi(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(jsonapi)
+    fmt.Println(jsonApi)
 }
 ```
 
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-jsonapi, err := client.JsonApi(nil).Load(
+jsonApi, err := client.JsonApi(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(jsonapi) // the returned mock data
+fmt.Println(jsonApi) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -252,9 +252,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    jsonapi, err := client.JsonApi(nil).Load(nil, nil)
+    jsonApi, err := client.JsonApi(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // jsonapi is the returned record
+    // jsonApi is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -297,7 +297,7 @@ API path: `/account.pl`
 
 ### JsonApi
 
-Create an instance: `json_api := client.JsonApi(nil)`
+Create an instance: `jsonApi := client.JsonApi(nil)`
 
 #### Operations
 
@@ -315,11 +315,11 @@ Create an instance: `json_api := client.JsonApi(nil)`
 #### Example: Load
 
 ```go
-json_api, err := client.JsonApi(nil).Load(nil, nil)
+jsonApi, err := client.JsonApi(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(json_api) // the loaded record
+fmt.Println(jsonApi) // the loaded record
 ```
 
 
@@ -346,7 +346,7 @@ fmt.Println(plugin) // the loaded record
 
 ### PluginApi
 
-Create an instance: `plugin_api := client.PluginApi(nil)`
+Create an instance: `pluginApi := client.PluginApi(nil)`
 
 #### Operations
 
@@ -357,11 +357,11 @@ Create an instance: `plugin_api := client.PluginApi(nil)`
 #### Example: Load
 
 ```go
-plugin_api, err := client.PluginApi(nil).Load(nil, nil)
+pluginApi, err := client.PluginApi(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(plugin_api) // the loaded record
+fmt.Println(pluginApi) // the loaded record
 ```
 
 

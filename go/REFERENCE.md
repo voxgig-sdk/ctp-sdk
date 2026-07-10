@@ -99,7 +99,8 @@ same parameters as `Direct()`.
 ## JsonApiEntity
 
 ```go
-json_api := client.JsonApi(nil)
+jsonApi := client.JsonApi(nil)
+fmt.Println(jsonApi.GetName()) // "json_api"
 ```
 
 ### Fields
@@ -117,6 +118,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.JsonApi(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -147,6 +152,7 @@ Return the entity name.
 
 ```go
 plugin := client.Plugin(nil)
+fmt.Println(plugin.GetName()) // "plugin"
 ```
 
 ### Operations
@@ -157,6 +163,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Plugin(nil).Load(map[string]any{"id": "plugin_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -186,7 +196,8 @@ Return the entity name.
 ## PluginApiEntity
 
 ```go
-plugin_api := client.PluginApi(nil)
+pluginApi := client.PluginApi(nil)
+fmt.Println(pluginApi.GetName()) // "plugin_api"
 ```
 
 ### Operations
@@ -197,6 +208,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.PluginApi(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

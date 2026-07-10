@@ -39,7 +39,7 @@ class Config {
     base: 'https://ctext.org',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

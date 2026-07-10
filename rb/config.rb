@@ -16,7 +16,7 @@ module CtpConfig
       "options" => {
         "base" => "https://ctext.org",
         "auth" => {
-          "prefix" => "Bearer",
+          "prefix" => "",
         },
         "headers" => {
           "content-type" => "application/json",
