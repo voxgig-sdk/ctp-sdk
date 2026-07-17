@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Ctp SDK exists test
 
 local sdk = require("ctp_sdk")
 
