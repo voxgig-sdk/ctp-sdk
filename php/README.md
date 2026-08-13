@@ -37,7 +37,7 @@ $client = new CtpSDK([
 
 ```php
 try {
-    // load() returns the bare JsonApi record (throws on error).
+    // load() returns the ENTITY — call data_get() for the JsonApi record (throws on error).
     $jsonapi = $client->JsonApi()->load();
     print_r($jsonapi);
 } catch (\Throwable $err) {
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $jsonapi = $client->JsonApi()->load();
+    $plugin = $client->Plugin()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -120,14 +120,18 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = CtpSDK::test();
+$client = CtpSDK::test([
+    "entity" => ["plugin" => ["test01" => ["id" => "test01"]]],
+]);
 
-// Entity ops return the bare mock record (throws on error).
-$jsonapi = $client->JsonApi()->load();
-print_r($jsonapi);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$plugin = $client->Plugin()->load(["id" => "test01"]);
+print_r($plugin);
 ```
 
 ### Use a custom fetch function
@@ -228,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -300,7 +304,7 @@ Create an instance: `$json_api = $client->JsonApi();`
 #### Example: Load
 
 ```php
-// load() returns the bare JsonApi record (throws on error).
+// load() returns the ENTITY — call data_get() for the JsonApi record (throws on error).
 $json_api = $client->JsonApi()->load();
 ```
 
@@ -318,7 +322,7 @@ Create an instance: `$plugin = $client->Plugin();`
 #### Example: Load
 
 ```php
-// load() returns the bare Plugin record (throws on error).
+// load() returns the ENTITY — call data_get() for the Plugin record (throws on error).
 $plugin = $client->Plugin()->load(["id" => "plugin_id"]);
 ```
 
@@ -336,7 +340,7 @@ Create an instance: `$plugin_api = $client->PluginApi();`
 #### Example: Load
 
 ```php
-// load() returns the bare PluginApi record (throws on error).
+// load() returns the ENTITY — call data_get() for the PluginApi record (throws on error).
 $plugin_api = $client->PluginApi()->load();
 ```
 
@@ -417,11 +421,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$jsonapi = $client->JsonApi();
-$jsonapi->load();
+$plugin = $client->Plugin();
+$plugin->load(["id" => "example_id"]);
 
-// $jsonapi->data_get() now returns the jsonapi data from the last load
-// $jsonapi->match_get() returns the last match criteria
+// $plugin->data_get() now returns the plugin data from the last load
+// $plugin->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

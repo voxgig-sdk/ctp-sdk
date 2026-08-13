@@ -36,7 +36,7 @@ client = CtpSDK.new({
 
 ```ruby
 begin
-  # load returns the bare JsonApi record (raises on error).
+  # load returns the ENTITY — call data_get for the JsonApi record (raises on error).
   jsonapi = client.JsonApi.load()
   puts jsonapi
 rescue => err
@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  jsonapi = client.JsonApi.load()
+  plugin = client.Plugin.load({ "id" => "example_id" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -114,14 +114,18 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = CtpSDK.test
+client = CtpSDK.test({
+  "entity" => { "plugin" => { "test01" => { "id" => "test01" } } },
+})
 
-# Entity ops return the bare mock record (raises on error).
-jsonapi = client.JsonApi.load()
-puts jsonapi
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+plugin = client.Plugin.load({ "id" => "test01" })
+puts plugin
 ```
 
 ### Use a custom fetch function
@@ -290,7 +294,7 @@ Create an instance: `json_api = client.JsonApi`
 #### Example: Load
 
 ```ruby
-# load returns the bare JsonApi record (raises on error).
+# load returns the ENTITY — call data_get for the JsonApi record (raises on error).
 json_api = client.JsonApi.load()
 ```
 
@@ -308,7 +312,7 @@ Create an instance: `plugin = client.Plugin`
 #### Example: Load
 
 ```ruby
-# load returns the bare Plugin record (raises on error).
+# load returns the ENTITY — call data_get for the Plugin record (raises on error).
 plugin = client.Plugin.load({ "id" => "plugin_id" })
 ```
 
@@ -326,7 +330,7 @@ Create an instance: `plugin_api = client.PluginApi`
 #### Example: Load
 
 ```ruby
-# load returns the bare PluginApi record (raises on error).
+# load returns the ENTITY — call data_get for the PluginApi record (raises on error).
 plugin_api = client.PluginApi.load()
 ```
 
@@ -407,11 +411,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-jsonapi = client.JsonApi
-jsonapi.load()
+plugin = client.Plugin
+plugin.load({ "id" => "example_id" })
 
-# jsonapi.data_get now returns the jsonapi data from the last load
-# jsonapi.match_get returns the last match criteria
+# plugin.data_get now returns the plugin data from the last load
+# plugin.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

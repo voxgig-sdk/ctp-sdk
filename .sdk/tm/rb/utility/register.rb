@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ CtpUtility.registrar = ->(u) {
   u.prepare_params = CtpUtilities::PrepareParams
   u.prepare_path = CtpUtilities::PreparePath
   u.prepare_query = CtpUtilities::PrepareQuery
+  u.graphql_body = CtpUtilities::GraphqlBody
+  u.graphql_errors = CtpUtilities::GraphqlErrors
   u.result_basic = CtpUtilities::ResultBasic
   u.result_body = CtpUtilities::ResultBody
   u.result_headers = CtpUtilities::ResultHeaders

@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local jsonapi, err = client:JsonApi():load()
+local plugin, err = client:Plugin():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -108,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:JsonApi():load()
+local result, err = client:Plugin():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -395,11 +395,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local jsonapi = client:JsonApi()
-jsonapi:load()
+local plugin = client:Plugin()
+plugin:load({ id = "example_id" })
 
--- jsonapi:data_get() now returns the jsonapi data from the last load
--- jsonapi:match_get() returns the last match criteria
+-- plugin:data_get() now returns the plugin data from the last load
+-- plugin:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

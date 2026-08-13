@@ -62,7 +62,7 @@ describe('PluginApiEntity', async () => {
     // LOAD
     const plugin_api_ref01_ent = client.PluginApi()
     const plugin_api_ref01_match_dt0: any = {}
-    const plugin_api_ref01_data_dt0 = await plugin_api_ref01_ent.load(plugin_api_ref01_match_dt0)
+    const plugin_api_ref01_data_dt0 = (await plugin_api_ref01_ent.load(plugin_api_ref01_match_dt0)).data()
     assert(null != plugin_api_ref01_data_dt0)
 
 

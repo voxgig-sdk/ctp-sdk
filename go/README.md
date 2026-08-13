@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-jsonapi, err := client.JsonApi(nil).Load(nil, nil)
+plugin, err := client.Plugin(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = jsonapi
+_ = plugin
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-jsonApi, err := client.JsonApi(nil).Load(
-    nil, nil,
+plugin, err := client.Plugin(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(jsonApi) // the returned mock data
+fmt.Println(plugin) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -438,11 +438,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-jsonapi := client.JsonApi(nil)
-jsonapi.Load(nil, nil)
+plugin := client.Plugin(nil)
+plugin.Load(map[string]any{"id": "example_id"}, nil)
 
-// jsonapi.Data() now returns the jsonapi data from the last load
-// jsonapi.Match() returns the last match criteria
+// plugin.Data() now returns the plugin data from the last load
+// plugin.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

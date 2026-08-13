@@ -75,6 +75,7 @@ module CtpConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/gettext",
                   "parts" => [
@@ -117,6 +118,7 @@ module CtpConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/getlink",
                   "parts" => [
@@ -150,6 +152,7 @@ module CtpConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/readlink",
                   "parts" => [
@@ -199,6 +202,7 @@ module CtpConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/plugins/{pluginId}/plugin.xml",
                   "parts" => [
@@ -270,6 +274,7 @@ module CtpConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/account.pl",
                   "parts" => [

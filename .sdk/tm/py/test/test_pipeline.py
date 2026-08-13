@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import CtpSDK
-from core.error import CtpError
-from core.result import CtpResult
-from core.response import CtpResponse
-from core.spec import CtpSpec
-from feature.base_feature import CtpBaseFeature
+from projectname_sdk.core.error import CtpError
+from projectname_sdk.core.result import CtpResult
+from projectname_sdk.core.response import CtpResponse
+from projectname_sdk.core.spec import CtpSpec
+from projectname_sdk.feature.base_feature import CtpBaseFeature
 
 
 def _client():

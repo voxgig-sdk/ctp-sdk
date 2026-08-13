@@ -55,8 +55,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const jsonapi = await client.JsonApi().load()
-  console.log(jsonapi)
+  const plugin = await client.Plugin().load({ id: "example_id" })
+  console.log(plugin)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CtpSDK.test()
 
-const jsonapi = await client.JsonApi().load()
-// jsonapi is a bare entity populated with mock response data
-console.log(jsonapi)
+const plugin = await client.Plugin().load({ id: 'test01' })
+// plugin is the entity, populated with mock response data
+// — call plugin.data() for the record itself
+console.log(plugin)
 ```
 
 You can also use the instance method:
@@ -139,10 +140,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.JsonApi()
+const entity = client.Plugin()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -449,11 +450,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const jsonapi = client.JsonApi()
-await jsonapi.load()
+const plugin = client.Plugin()
+await plugin.load({ id: "example_id" })
 
-// jsonapi.data() now returns the jsonapi data from the last `load`
-// jsonapi.match() returns the last match criteria
+// plugin.data() now returns the plugin data from the last `load`
+// plugin.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

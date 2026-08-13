@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Ctp SDK exists test
 
 import pytest
 from ctp_sdk import CtpSDK

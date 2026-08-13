@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from ctp_sdk.utility.voxgig_struct import voxgig_struct as vs
 from ctp_sdk import CtpSDK
-from core import helpers
+from ctp_sdk.core import helpers
 from test import runner
 
 

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import CtpControl
-from core.error import CtpError
-from core.result import CtpResult
-from core.spec import CtpSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import CtpControl
+from projectname_sdk.core.error import CtpError
+from projectname_sdk.core.result import CtpResult
+from projectname_sdk.core.spec import CtpSpec
 
 
 # True when this SDK was generated with the named feature.

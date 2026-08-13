@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = CtpSDK.test()
-const jsonapi = await client.JsonApi().load()
-// jsonapi is a bare JsonApi populated with mock data
-console.log(jsonapi)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = CtpSDK.test({
+  entity: {
+    plugin: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const plugin = await client.Plugin().load({ id: 'test01' })
+// plugin is the Plugin entity, populated with mock data
+// — call plugin.data() for the record itself
+console.log(plugin)
 ```
 
 ### Python
 
 ```python
 client = CtpSDK.test()
-jsonapi = client.JsonApi().load()
-print(jsonapi)
+plugin = client.Plugin().load({"id": "test01"})
+print(plugin)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(jsonapi)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = CtpSDK::test([
-    "entity" => ["jsonapi" => ["test01" => []]],
+    "entity" => ["plugin" => ["test01" => ["id" => "test01"]]],
 ]);
-$jsonapi = $client->JsonApi()->load();
+$plugin = $client->Plugin()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.JsonApi(nil).Load(
-    nil, nil,
+result, err := client.Plugin(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.JsonApi(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = CtpSDK.test({
-  "entity" => { "jsonapi" => { "test01" => {} } },
+  "entity" => { "plugin" => { "test01" => { "id" => "test01" } } },
 })
-jsonapi = client.JsonApi.load()
+plugin = client.Plugin.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:JsonApi():load()
+local result, err = client:Plugin():load({ id = "test01" })
 ```
 
 ## Packages
@@ -191,7 +200,7 @@ $client = new CtpSDK([
 ]);
 
 
-// Load a specific jsonapi (returns the bare record; throws on error)
+// Load a specific jsonapi (returns the ENTITY; call data_get() for the record; throws on error)
 $jsonapi = $client->JsonApi()->load();
 print_r($jsonapi);
 ```
@@ -223,7 +232,7 @@ client = CtpSDK.new({
 })
 
 
-# Load a specific jsonapi (returns the bare record; raises on error)
+# Load a specific jsonapi (returns the ENTITY; call data_get for the record)
 jsonapi = client.JsonApi.load()
 puts jsonapi
 ```
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://ctext.org/tools/api](https://ctext.org/tools/api)
 

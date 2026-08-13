@@ -62,7 +62,7 @@ describe('JsonApiEntity', async () => {
     // LOAD
     const json_api_ref01_ent = client.JsonApi()
     const json_api_ref01_match_dt0: any = {}
-    const json_api_ref01_data_dt0 = await json_api_ref01_ent.load(json_api_ref01_match_dt0)
+    const json_api_ref01_data_dt0 = (await json_api_ref01_ent.load(json_api_ref01_match_dt0)).data()
     assert(null != json_api_ref01_data_dt0)
 
 

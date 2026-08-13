@@ -74,6 +74,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/gettext",
                 ["parts"] = {
@@ -116,6 +117,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/getlink",
                 ["parts"] = {
@@ -149,6 +151,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/readlink",
                 ["parts"] = {
@@ -198,6 +201,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/plugins/{pluginId}/plugin.xml",
                 ["parts"] = {
@@ -269,6 +273,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/account.pl",
                 ["parts"] = {

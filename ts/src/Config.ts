@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'Ctp',
   }
 
 
@@ -109,6 +109,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/gettext",
               "parts": [
@@ -151,6 +152,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/getlink",
               "parts": [
@@ -184,6 +186,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/readlink",
               "parts": [
@@ -233,6 +236,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/plugins/{pluginId}/plugin.xml",
               "parts": [
@@ -304,6 +308,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/account.pl",
               "parts": [
