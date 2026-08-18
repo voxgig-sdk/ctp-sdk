@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from ctp_sdk.config import make_config
+from ctp_sdk.config import shared_config
 from ctp_sdk.features import _make_feature
 from ctp_sdk.core.control import CtpControl
 from ctp_sdk.core.error import CtpError
@@ -24,7 +24,7 @@ from ctp_sdk.core.spec import CtpSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

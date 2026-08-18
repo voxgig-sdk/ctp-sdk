@@ -1,6 +1,20 @@
 # Ctp SDK configuration
 
 module CtpConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -31,18 +45,12 @@ module CtpConfig
         "json_api" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "url",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "urn",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
           ],
           "name" => "json_api",
@@ -52,20 +60,16 @@ module CtpConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => "en",
                         "kind" => "query",
                         "name" => "if",
                         "orig" => "if",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "ctp:analects/xue-er",
                         "kind" => "query",
                         "name" => "urn",
@@ -92,23 +96,18 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => 0,
                         "kind" => "query",
                         "name" => "redirect",
                         "orig" => "redirect",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "example" => "ctp:analects/xue-er",
                         "kind" => "query",
                         "name" => "urn",
@@ -135,14 +134,11 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => "https://ctext.org/analects/xue-er",
                         "kind" => "query",
                         "name" => "url",
@@ -168,10 +164,8 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -187,18 +181,15 @@ module CtpConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "example" => "textexport",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "plugin_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -224,10 +215,8 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -243,20 +232,16 @@ module CtpConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => "en",
                         "kind" => "query",
                         "name" => "if",
                         "orig" => "if",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "https://ctext.org/plugins/textexport/plugin.xml",
                         "kind" => "query",
                         "name" => "installplugin",
@@ -265,11 +250,9 @@ module CtpConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "return",
                         "orig" => "return",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -291,10 +274,8 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {

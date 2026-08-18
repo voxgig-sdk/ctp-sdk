@@ -23,8 +23,8 @@ class CtpSDK:
         utility = CtpUtility()
         self._utility = utility
 
-        from ctp_sdk.config import make_config
-        config = make_config()
+        from ctp_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,

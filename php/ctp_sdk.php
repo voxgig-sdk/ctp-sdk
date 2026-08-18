@@ -40,7 +40,7 @@ class CtpSDK
         $utility = new CtpUtility();
         $this->_utility = $utility;
 
-        $config = CtpConfig::make_config();
+        $config = CtpConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

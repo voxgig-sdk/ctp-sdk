@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://ctext.org',
+    base: "https://ctext.org",
 
     auth: {
       prefix: '',
@@ -65,18 +65,12 @@ class Config {
     "json_api": {
       "fields": [
         {
-          "active": true,
           "name": "url",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "urn",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "json_api",
@@ -86,20 +80,16 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "if",
                     "orig": "if",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "ctp:analects/xue-er",
                     "kind": "query",
                     "name": "urn",
@@ -125,24 +115,19 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": 0,
                     "kind": "query",
                     "name": "redirect",
                     "orig": "redirect",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": "ctp:analects/xue-er",
                     "kind": "query",
                     "name": "urn",
@@ -168,15 +153,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "https://ctext.org/analects/xue-er",
                     "kind": "query",
                     "name": "url",
@@ -201,11 +183,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -221,18 +201,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "textexport",
                     "kind": "param",
                     "name": "id",
                     "orig": "plugin_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -257,11 +234,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -277,20 +252,16 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "if",
                     "orig": "if",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "https://ctext.org/plugins/textexport/plugin.xml",
                     "kind": "query",
                     "name": "installplugin",
@@ -299,11 +270,9 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "return",
                     "orig": "return",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -324,11 +293,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

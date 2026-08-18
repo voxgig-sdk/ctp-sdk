@@ -28,7 +28,7 @@ class CtpSDK
     utility = CtpUtility.new
     @_utility = utility
 
-    config = CtpConfig.make_config
+    config = CtpConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
