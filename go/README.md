@@ -6,7 +6,7 @@ The Golang SDK for the Ctp API — an entity-oriented client using standard Go c
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.JsonApi(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -265,8 +265,8 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"url"` |  |
-| `"urn"` |  |
+| `"url"` | Direct URL to the text |
+| `"urn"` | CTP URN for the specified URL |
 
 Operations: Load.
 
@@ -309,8 +309,8 @@ Create an instance: `jsonApi := client.JsonApi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `url` | `string` |  |
-| `urn` | `string` |  |
+| `url` | `string` | Direct URL to the text |
+| `urn` | `string` | CTP URN for the specified URL |
 
 #### Example: Load
 

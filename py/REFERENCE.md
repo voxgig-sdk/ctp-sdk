@@ -96,8 +96,8 @@ json_api = client.JsonApi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | `str` | No |  |
-| `urn` | `str` | No |  |
+| `url` | `str` | No | Direct URL to the text |
+| `urn` | `str` | No | CTP URN for the specified URL |
 
 ### Operations
 

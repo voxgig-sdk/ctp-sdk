@@ -141,8 +141,8 @@ const json_api = client.JsonApi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | `string` | No |  |
-| `urn` | `string` | No |  |
+| `url` | `string` | No | Direct URL to the text |
+| `urn` | `string` | No | CTP URN for the specified URL |
 
 ### Operations
 

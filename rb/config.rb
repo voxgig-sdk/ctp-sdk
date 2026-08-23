@@ -19,6 +19,9 @@ module CtpConfig
     {
       "main" => {
         "name" => "Ctp",
+        "slug" => "ctp",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -46,10 +49,12 @@ module CtpConfig
           "fields" => [
             {
               "name" => "url",
+              "short" => "Direct URL to the text",
               "type" => "`$STRING`",
             },
             {
               "name" => "urn",
+              "short" => "CTP URN for the specified URL",
               "type" => "`$STRING`",
             },
           ],

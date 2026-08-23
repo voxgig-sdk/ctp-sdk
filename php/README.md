@@ -254,8 +254,8 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `url` |  |
-| `urn` |  |
+| `url` | Direct URL to the text |
+| `urn` | CTP URN for the specified URL |
 
 Operations: Load.
 
@@ -298,8 +298,8 @@ Create an instance: `$json_api = $client->JsonApi();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `url` | `string` |  |
-| `urn` | `string` |  |
+| `url` | `string` | Direct URL to the text |
+| `urn` | `string` | CTP URN for the specified URL |
 
 #### Example: Load
 

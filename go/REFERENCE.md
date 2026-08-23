@@ -107,8 +107,8 @@ fmt.Println(jsonApi.GetName()) // "json_api"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `url` | `string` | No |  |
-| `urn` | `string` | No |  |
+| `url` | `string` | No | Direct URL to the text |
+| `urn` | `string` | No | CTP URN for the specified URL |
 
 ### Operations
 

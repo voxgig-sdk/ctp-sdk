@@ -36,12 +36,14 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "Direct URL to the text",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "urn",
               "req": false,
+              "short": "CTP URN for the specified URL",
               "type": "`$STRING`"
             }
           ],

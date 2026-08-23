@@ -244,8 +244,8 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `url` |  |
-| `urn` |  |
+| `url` | Direct URL to the text |
+| `urn` | CTP URN for the specified URL |
 
 Operations: Load.
 
@@ -288,8 +288,8 @@ Create an instance: `json_api = client.JsonApi`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `url` | `String` |  |
-| `urn` | `String` |  |
+| `url` | `String` | Direct URL to the text |
+| `urn` | `String` | CTP URN for the specified URL |
 
 #### Example: Load
 

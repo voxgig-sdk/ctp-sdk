@@ -231,8 +231,8 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `url` |  |
-| `urn` |  |
+| `url` | Direct URL to the text |
+| `urn` | CTP URN for the specified URL |
 
 Operations: Load.
 
@@ -275,8 +275,8 @@ Create an instance: `local json_api = client:JsonApi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `url` | `string` |  |
-| `urn` | `string` |  |
+| `url` | `string` | Direct URL to the text |
+| `urn` | `string` | CTP URN for the specified URL |
 
 #### Example: Load
 
