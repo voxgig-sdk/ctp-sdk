@@ -26,8 +26,8 @@ class JsonApiLoadMatch(TypedDict, total=False):
     urn: str
 
 
-class Plugin(TypedDict):
-    pass
+class Plugin(TypedDict, total=False):
+    id: str
 
 
 class PluginLoadMatch(TypedDict):

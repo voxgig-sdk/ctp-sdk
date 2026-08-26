@@ -48,9 +48,13 @@ class PluginEntityTest extends TestCase
 
         // LOAD
         $plugin_ref01_ent = $client->Plugin(null);
-        $plugin_ref01_match_dt0 = [];
+        $plugin_ref01_match_dt0 = [
+            "id" => $plugin_ref01_data["id"],
+        ];
         $plugin_ref01_data_dt0_loaded = $plugin_ref01_ent->load($plugin_ref01_match_dt0, null);
-        $this->assertNotNull($plugin_ref01_data_dt0_loaded);
+        $plugin_ref01_data_dt0_load_result = Helpers::to_map(is_object($plugin_ref01_data_dt0_loaded) && method_exists($plugin_ref01_data_dt0_loaded, 'data_get') ? $plugin_ref01_data_dt0_loaded->data_get() : $plugin_ref01_data_dt0_loaded);
+        $this->assertNotNull($plugin_ref01_data_dt0_load_result);
+        $this->assertEquals($plugin_ref01_data_dt0_load_result["id"], $plugin_ref01_data["id"]);
 
     }
 }

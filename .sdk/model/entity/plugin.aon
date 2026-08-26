@@ -4,6 +4,19 @@ main: kit: entity: plugin: {
 
   alias: field: {}
 
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
   name: "plugin"
   op: {
     load: {

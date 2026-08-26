@@ -44,10 +44,14 @@ describe("PluginEntity", function()
 
     -- LOAD
     local plugin_ref01_ent = client:Plugin(nil)
-    local plugin_ref01_match_dt0 = {}
+    local plugin_ref01_match_dt0 = {
+      id = plugin_ref01_data["id"],
+    }
     local plugin_ref01_data_dt0_loaded, err = plugin_ref01_ent:load(plugin_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(plugin_ref01_data_dt0_loaded)
+    local plugin_ref01_data_dt0_load_result = helpers.to_map(type(plugin_ref01_data_dt0_loaded) == 'table' and plugin_ref01_data_dt0_loaded.data_get and plugin_ref01_data_dt0_loaded:data_get() or plugin_ref01_data_dt0_loaded)
+    assert.is_not_nil(plugin_ref01_data_dt0_load_result)
+    assert.are.equal(plugin_ref01_data_dt0_load_result["id"], plugin_ref01_data["id"])
 
   end)
 end)

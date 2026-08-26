@@ -26,6 +26,7 @@ type JsonApiLoadMatch struct {
 
 // Plugin is the typed data model for the plugin entity.
 type Plugin struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // PluginLoadMatch is the typed request payload for Plugin.LoadTyped.

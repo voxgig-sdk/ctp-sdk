@@ -28,6 +28,7 @@ module CtpConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -178,7 +179,12 @@ module CtpConfig
           },
         },
         "plugin" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
           "name" => "plugin",
           "op" => {
             "load" => {

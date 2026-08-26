@@ -41,9 +41,13 @@ class PluginEntityTest < Minitest::Test
 
     # LOAD
     plugin_ref01_ent = client.Plugin(nil)
-    plugin_ref01_match_dt0 = {}
+    plugin_ref01_match_dt0 = {
+      "id" => plugin_ref01_data["id"],
+    }
     plugin_ref01_data_dt0_loaded = plugin_ref01_ent.load(plugin_ref01_match_dt0, nil)
-    assert !plugin_ref01_data_dt0_loaded.nil?
+    plugin_ref01_data_dt0_load_result = Helpers.to_map(plugin_ref01_data_dt0_loaded.respond_to?(:data_get) ? plugin_ref01_data_dt0_loaded.data_get : plugin_ref01_data_dt0_loaded)
+    assert !plugin_ref01_data_dt0_load_result.nil?
+    assert_equal plugin_ref01_data_dt0_load_result["id"], plugin_ref01_data["id"]
 
   end
 end

@@ -48,9 +48,13 @@ class TestPluginEntity:
 
         # LOAD
         plugin_ref01_ent = client.Plugin(None)
-        plugin_ref01_match_dt0 = {}
+        plugin_ref01_match_dt0 = {
+            "id": plugin_ref01_data["id"],
+        }
         plugin_ref01_data_dt0_loaded = plugin_ref01_ent.load(plugin_ref01_match_dt0, None)
-        assert plugin_ref01_data_dt0_loaded is not None
+        plugin_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(plugin_ref01_data_dt0_loaded))
+        assert plugin_ref01_data_dt0_load_result is not None
+        assert plugin_ref01_data_dt0_load_result["id"] == plugin_ref01_data["id"]
 
 
 

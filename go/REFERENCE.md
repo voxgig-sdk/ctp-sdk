@@ -155,6 +155,12 @@ plugin := client.Plugin(nil)
 fmt.Println(plugin.GetName()) // "plugin"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`

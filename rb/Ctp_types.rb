@@ -35,8 +35,13 @@ JsonApiLoadMatch = Struct.new(
 )
 
 # Plugin entity data model.
-class Plugin
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+Plugin = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for Plugin#load.
 #

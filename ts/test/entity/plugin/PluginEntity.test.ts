@@ -59,9 +59,12 @@ describe('PluginEntity', async () => {
 
     let plugin_ref01_data = Object.values(setup.data.existing.plugin)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const plugin_ref01_ent = client.Plugin()
+    const plugin_ref01_match_dt0: any = {}
+    plugin_ref01_match_dt0.id = plugin_ref01_data.id
+    const plugin_ref01_data_dt0 = (await plugin_ref01_ent.load(plugin_ref01_match_dt0)).data()
+    assert(plugin_ref01_data_dt0.id === plugin_ref01_data.id)
 
 
   })

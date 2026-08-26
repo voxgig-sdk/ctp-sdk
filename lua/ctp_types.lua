@@ -15,6 +15,7 @@
 ---@field urn? string
 
 ---@class Plugin
+---@field id? string
 
 ---@class PluginLoadMatch
 ---@field id string

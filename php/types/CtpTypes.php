@@ -29,6 +29,7 @@ class JsonApiLoadMatch
 /** Plugin entity data model. */
 class Plugin
 {
+    public ?string $id = null;
 }
 
 /** Request payload for Plugin#load. */

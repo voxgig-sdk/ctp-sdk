@@ -42,6 +42,7 @@ class CtpConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -192,7 +193,12 @@ class CtpConfig
           ],
         ],
         'plugin' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
           'name' => 'plugin',
           'op' => [
             'load' => [

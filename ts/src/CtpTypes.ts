@@ -16,6 +16,7 @@ export interface JsonApiLoadMatch {
 }
 
 export interface Plugin {
+  id?: string
 }
 
 export interface PluginLoadMatch {
