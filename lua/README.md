@@ -38,7 +38,7 @@ local client = sdk.new({
 ### 3. Load a jsonapi
 
 ```lua
-local jsonapi, err = client:JsonApi():load()
+local jsonapi, err = client:JsonApi():load({ urn = "example_urn" })
 if err then error(err) end
 print(jsonapi)
 ```
@@ -282,7 +282,7 @@ Create an instance: `local json_api = client:JsonApi(nil)`
 #### Example: Load
 
 ```lua
-local json_api, err = client:JsonApi():load()
+local json_api, err = client:JsonApi():load({ urn = "urn" })
 ```
 
 
@@ -322,8 +322,31 @@ Create an instance: `local plugin_api = client:PluginApi(nil)`
 #### Example: Load
 
 ```lua
-local plugin_api, err = client:PluginApi():load()
+local plugin_api, err = client:PluginApi():load({ installplugin = "installplugin" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

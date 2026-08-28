@@ -21,8 +21,7 @@ class JsonApi(TypedDict, total=False):
     urn: str
 
 
-class JsonApiLoadMatch(TypedDict, total=False):
-    url: str
+class JsonApiLoadMatch(TypedDict):
     urn: str
 
 
@@ -39,4 +38,4 @@ class PluginApi(TypedDict):
 
 
 class PluginApiLoadMatch(TypedDict):
-    pass
+    installplugin: str

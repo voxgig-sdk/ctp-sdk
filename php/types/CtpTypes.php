@@ -22,8 +22,8 @@ class JsonApi
 /** Request payload for JsonApi#load. */
 class JsonApiLoadMatch
 {
-    public ?string $url = null;
-    public ?string $urn = null;
+    public ?string $if = null;
+    public string $urn;
 }
 
 /** Plugin entity data model. */
@@ -46,5 +46,8 @@ class PluginApi
 /** Request payload for PluginApi#load. */
 class PluginApiLoadMatch
 {
+    public ?string $if = null;
+    public string $installplugin;
+    public ?string $return = null;
 }
 

@@ -20,8 +20,8 @@ type JsonApi struct {
 
 // JsonApiLoadMatch is the typed request payload for JsonApi.LoadTyped.
 type JsonApiLoadMatch struct {
-	Url *string `json:"url,omitempty"`
-	Urn *string `json:"urn,omitempty"`
+	If *string `json:"if,omitempty"`
+	Urn string `json:"urn"`
 }
 
 // Plugin is the typed data model for the plugin entity.
@@ -40,6 +40,9 @@ type PluginApi struct {
 
 // PluginApiLoadMatch is the typed request payload for PluginApi.LoadTyped.
 type PluginApiLoadMatch struct {
+	If *string `json:"if,omitempty"`
+	Installplugin string `json:"installplugin"`
+	Return *string `json:"return,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

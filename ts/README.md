@@ -41,7 +41,7 @@ const client = new CtpSDK({
 
 ```ts
 try {
-  const jsonapi = await client.JsonApi().load()
+  const jsonapi = await client.JsonApi().load({ urn: 'example_urn' })
   console.log(jsonapi)
 } catch (err) {
   console.error('load failed:', err)
@@ -344,7 +344,7 @@ Create an instance: `const json_api = client.JsonApi()`
 #### Example: Load
 
 ```ts
-const json_api = await client.JsonApi().load()
+const json_api = await client.JsonApi().load({ urn: 'urn' })
 ```
 
 
@@ -384,8 +384,31 @@ Create an instance: `const plugin_api = client.PluginApi()`
 #### Example: Load
 
 ```ts
-const plugin_api = await client.PluginApi().load()
+const plugin_api = await client.PluginApi().load({ installplugin: 'installplugin' })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

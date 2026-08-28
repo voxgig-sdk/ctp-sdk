@@ -11,8 +11,8 @@ export interface JsonApi {
 }
 
 export interface JsonApiLoadMatch {
-  url?: string
-  urn?: string
+  if?: string
+  urn: string
 }
 
 export interface Plugin {
@@ -27,5 +27,8 @@ export interface PluginApi {
 }
 
 export interface PluginApiLoadMatch {
+  if?: string
+  installplugin: string
+  return?: string
 }
 

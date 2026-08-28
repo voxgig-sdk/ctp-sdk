@@ -37,7 +37,7 @@ client = CtpSDK.new({
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the JsonApi record (raises on error).
-  jsonapi = client.JsonApi.load()
+  jsonapi = client.JsonApi.load({ "urn" => "example_urn" })
   puts jsonapi
 rescue => err
   warn "load failed: #{err}"
@@ -296,7 +296,7 @@ Create an instance: `json_api = client.JsonApi`
 
 ```ruby
 # load returns the ENTITY — call data_get for the JsonApi record (raises on error).
-json_api = client.JsonApi.load()
+json_api = client.JsonApi.load({ "urn" => "urn" })
 ```
 
 
@@ -338,8 +338,31 @@ Create an instance: `plugin_api = client.PluginApi`
 
 ```ruby
 # load returns the ENTITY — call data_get for the PluginApi record (raises on error).
-plugin_api = client.PluginApi.load()
+plugin_api = client.PluginApi.load({ "installplugin" => "installplugin" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

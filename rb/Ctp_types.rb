@@ -23,13 +23,13 @@ JsonApi = Struct.new(
 
 # Request payload for JsonApi#load.
 #
-# @!attribute [rw] url
+# @!attribute [rw] if
 #   @return [String, nil]
 #
 # @!attribute [rw] urn
-#   @return [String, nil]
+#   @return [String]
 JsonApiLoadMatch = Struct.new(
-  :url,
+  :if,
   :urn,
   keyword_init: true
 )
@@ -57,6 +57,19 @@ class PluginApi
 end
 
 # Request payload for PluginApi#load.
-class PluginApiLoadMatch
-end
+#
+# @!attribute [rw] if
+#   @return [String, nil]
+#
+# @!attribute [rw] installplugin
+#   @return [String]
+#
+# @!attribute [rw] return
+#   @return [String, nil]
+PluginApiLoadMatch = Struct.new(
+  :if,
+  :installplugin,
+  :return,
+  keyword_init: true
+)
 

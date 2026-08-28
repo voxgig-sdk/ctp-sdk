@@ -11,8 +11,8 @@
 ---@field urn? string
 
 ---@class JsonApiLoadMatch
----@field url? string
----@field urn? string
+---@field if? string
+---@field urn string
 
 ---@class Plugin
 ---@field id? string
@@ -23,6 +23,9 @@
 ---@class PluginApi
 
 ---@class PluginApiLoadMatch
+---@field if? string
+---@field installplugin string
+---@field return? string
 
 local M = {}
 
