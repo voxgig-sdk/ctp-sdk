@@ -37,16 +37,22 @@ main: kit: entity: plugin: {
           }
           method: "GET"
           orig: "/plugins/{pluginId}/plugin.xml"
-          parts: [
-            "plugins"
-            "{id}"
-            "plugin.xml"
-          ]
           rename: {
             param: {
               pluginId: "id"
             }
           }
+          segments: [
+            {
+              lit: "plugins"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "plugin.xml"
+            }
+          ]
           select: {
             exist: [
               "id"

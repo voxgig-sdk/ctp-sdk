@@ -102,9 +102,13 @@ class CtpConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/gettext',
-                  'parts' => [
-                    'api',
-                    'gettext',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'gettext',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -115,6 +119,10 @@ class CtpConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'gettext',
                   ],
                 ],
                 [
@@ -140,9 +148,13 @@ class CtpConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/getlink',
-                  'parts' => [
-                    'api',
-                    'getlink',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'getlink',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -153,6 +165,10 @@ class CtpConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'getlink',
                   ],
                 ],
                 [
@@ -171,9 +187,13 @@ class CtpConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/readlink',
-                  'parts' => [
-                    'api',
-                    'readlink',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'readlink',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -183,6 +203,10 @@ class CtpConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'readlink',
                   ],
                 ],
               ],
@@ -198,6 +222,10 @@ class CtpConfig
               'name' => 'id',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'plugin',
           'op' => [
@@ -221,14 +249,20 @@ class CtpConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/plugins/{pluginId}/plugin.xml',
-                  'parts' => [
-                    'plugins',
-                    '{id}',
-                    'plugin.xml',
-                  ],
                   'rename' => [
                     'param' => [
                       'pluginId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'plugins',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'plugin.xml',
                     ],
                   ],
                   'select' => [
@@ -239,6 +273,11 @@ class CtpConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'plugins',
+                    '{id}',
+                    'plugin.xml',
                   ],
                 ],
               ],
@@ -285,8 +324,10 @@ class CtpConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/account.pl',
-                  'parts' => [
-                    'account.pl',
+                  'segments' => [
+                    [
+                      'lit' => 'account.pl',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -298,6 +339,9 @@ class CtpConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'account.pl',
                   ],
                 ],
               ],

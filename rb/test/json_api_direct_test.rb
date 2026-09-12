@@ -67,15 +67,17 @@ def json_api_direct_setup(mockres)
   env = Runner.env_override({
     "CTP_TEST_JSON_API_ENTID" => {},
     "CTP_TEST_LIVE" => "FALSE",
-    "CTP_APIKEY" => "NONE",
+    "CTP_APIKEY" => "",
   })
 
   live = env["CTP_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["CTP_APIKEY"],
-    }
+    })
     client = CtpSDK.new(merged_opts)
     return {
       client: client,

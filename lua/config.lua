@@ -76,9 +76,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/gettext",
-                ["parts"] = {
-                  "api",
-                  "gettext",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "gettext",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -89,6 +93,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "gettext",
                 },
               },
               {
@@ -114,9 +122,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/getlink",
-                ["parts"] = {
-                  "api",
-                  "getlink",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "getlink",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -127,6 +139,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "getlink",
                 },
               },
               {
@@ -145,9 +161,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/readlink",
-                ["parts"] = {
-                  "api",
-                  "readlink",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "readlink",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -157,6 +177,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "readlink",
                 },
               },
             },
@@ -172,6 +196,10 @@ local function make_config()
             ["name"] = "id",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "plugin",
         ["op"] = {
@@ -195,14 +223,20 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/plugins/{pluginId}/plugin.xml",
-                ["parts"] = {
-                  "plugins",
-                  "{id}",
-                  "plugin.xml",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["pluginId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "plugins",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "plugin.xml",
                   },
                 },
                 ["select"] = {
@@ -213,6 +247,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "plugins",
+                  "{id}",
+                  "plugin.xml",
                 },
               },
             },
@@ -259,8 +298,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/account.pl",
-                ["parts"] = {
-                  "account.pl",
+                ["segments"] = {
+                  {
+                    ["lit"] = "account.pl",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -272,6 +313,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "account.pl",
                 },
               },
             },

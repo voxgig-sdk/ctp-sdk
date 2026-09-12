@@ -47,9 +47,13 @@ main: kit: entity: json_api: {
           }
           method: "GET"
           orig: "/api/gettext"
-          parts: [
-            "api"
-            "gettext"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "gettext"
+            }
           ]
           select: {
             exist: [
@@ -85,9 +89,13 @@ main: kit: entity: json_api: {
           }
           method: "GET"
           orig: "/api/getlink"
-          parts: [
-            "api"
-            "getlink"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "getlink"
+            }
           ]
           select: {
             exist: [
@@ -115,9 +123,13 @@ main: kit: entity: json_api: {
           }
           method: "GET"
           orig: "/api/readlink"
-          parts: [
-            "api"
-            "readlink"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "readlink"
+            }
           ]
           select: {
             exist: [

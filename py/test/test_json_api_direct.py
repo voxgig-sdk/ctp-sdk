@@ -63,15 +63,18 @@ def _json_api_direct_setup(mockres):
     env = runner.env_override({
         "CTP_TEST_JSON_API_ENTID": {},
         "CTP_TEST_LIVE": "FALSE",
-        "CTP_APIKEY": "NONE",
+        "CTP_APIKEY": "",
     })
 
     live = env.get("CTP_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("CTP_APIKEY"),
-        }
+        })
         client = CtpSDK(merged_opts)
         return {
             "client": client,

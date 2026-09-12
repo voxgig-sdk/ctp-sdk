@@ -39,8 +39,10 @@ main: kit: entity: plugin_api: {
           }
           method: "GET"
           orig: "/account.pl"
-          parts: [
-            "account.pl"
+          segments: [
+            {
+              lit: "account.pl"
+            }
           ]
           select: {
             exist: [

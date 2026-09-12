@@ -1,6 +1,14 @@
 # Ctp SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -97,9 +105,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/gettext",
-                "parts": [
-                  "api",
-                  "gettext",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "gettext",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -111,6 +123,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "gettext",
+                ],
               },
               {
                 "args": {
@@ -135,9 +151,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/getlink",
-                "parts": [
-                  "api",
-                  "getlink",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "getlink",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -149,6 +169,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "getlink",
+                ],
               },
               {
                 "args": {
@@ -166,9 +190,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/readlink",
-                "parts": [
-                  "api",
-                  "readlink",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "readlink",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -179,6 +207,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "readlink",
+                ],
               },
             ],
           },
@@ -194,6 +226,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "plugin",
         "op": {
           "load": {
@@ -216,16 +252,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/plugins/{pluginId}/plugin.xml",
-                "parts": [
-                  "plugins",
-                  "{id}",
-                  "plugin.xml",
-                ],
                 "rename": {
                   "param": {
                     "pluginId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "plugins",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "plugin.xml",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -235,6 +277,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "plugins",
+                  "{id}",
+                  "plugin.xml",
+                ],
               },
             ],
           },
@@ -280,8 +327,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/account.pl",
-                "parts": [
-                  "account.pl",
+                "segments": [
+                  {
+                    "lit": "account.pl",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -294,6 +343,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "account.pl",
+                ],
               },
             ],
           },

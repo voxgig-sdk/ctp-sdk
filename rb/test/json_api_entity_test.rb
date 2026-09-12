@@ -81,7 +81,7 @@ def json_api_basic_setup(extra)
     "CTP_TEST_JSON_API_ENTID" => idmap,
     "CTP_TEST_LIVE" => "FALSE",
     "CTP_TEST_EXPLAIN" => "FALSE",
-    "CTP_APIKEY" => "NONE",
+    "CTP_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def json_api_basic_setup(extra)
 
   if env["CTP_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["CTP_APIKEY"],
       },

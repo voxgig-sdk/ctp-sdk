@@ -88,9 +88,13 @@ module CtpConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/gettext",
-                  "parts" => [
-                    "api",
-                    "gettext",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "gettext",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -102,6 +106,10 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "gettext",
+                  ],
                 },
                 {
                   "args" => {
@@ -126,9 +134,13 @@ module CtpConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/getlink",
-                  "parts" => [
-                    "api",
-                    "getlink",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "getlink",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -140,6 +152,10 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "getlink",
+                  ],
                 },
                 {
                   "args" => {
@@ -157,9 +173,13 @@ module CtpConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/readlink",
-                  "parts" => [
-                    "api",
-                    "readlink",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "readlink",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -170,6 +190,10 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "readlink",
+                  ],
                 },
               ],
             },
@@ -185,6 +209,10 @@ module CtpConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "plugin",
           "op" => {
             "load" => {
@@ -207,16 +235,22 @@ module CtpConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/plugins/{pluginId}/plugin.xml",
-                  "parts" => [
-                    "plugins",
-                    "{id}",
-                    "plugin.xml",
-                  ],
                   "rename" => {
                     "param" => {
                       "pluginId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "plugins",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "plugin.xml",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -226,6 +260,11 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "plugins",
+                    "{id}",
+                    "plugin.xml",
+                  ],
                 },
               ],
             },
@@ -271,8 +310,10 @@ module CtpConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/account.pl",
-                  "parts" => [
-                    "account.pl",
+                  "segments" => [
+                    {
+                      "lit" => "account.pl",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -285,6 +326,9 @@ module CtpConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "account.pl",
+                  ],
                 },
               ],
             },
