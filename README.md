@@ -105,7 +105,7 @@ local result, err = client:Plugin():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/ctp` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ctp-sdk/releases) |
+| TypeScript | `@voxgig-sdk/ctp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ctp-sdk/releases) |
 | Python | `voxgig-sdk-ctp` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ctp-sdk/releases) |
 | PHP | `voxgig-sdk/ctp` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ctp-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/ctp-sdk/go` | `go get github.com/voxgig-sdk/ctp-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Plugin():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { CtpSDK } from '@voxgig-sdk/ctp'
+import { CtpSDK } from '@voxgig-sdk/ctp-sdk'
 
 const client = new CtpSDK({
   apikey: process.env.CTP_APIKEY,

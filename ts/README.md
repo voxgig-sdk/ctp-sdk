@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CtpSDK } from '@voxgig-sdk/ctp'
+import { CtpSDK } from '@voxgig-sdk/ctp-sdk'
 
 const client = new CtpSDK({
   apikey: process.env.CTP_APIKEY,
@@ -470,7 +470,7 @@ ctp/
 Import the SDK from the package root:
 
 ```ts
-import { CtpSDK } from '@voxgig-sdk/ctp'
+import { CtpSDK } from '@voxgig-sdk/ctp-sdk'
 ```
 
 ### Entity state
